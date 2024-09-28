@@ -53,15 +53,16 @@ class Homer extends StatelessWidget {
             padding: const EdgeInsets.only(
               top: 50
             ),
-            child: const Column(
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   'News of the week',
                   style: TextStyle(
-                    fontWeight: FontWeight.w200
+                    fontWeight: FontWeight.w500
                   )
-                )
+                ),
+                Container()
               ],
             ),
           )
