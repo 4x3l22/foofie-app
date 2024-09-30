@@ -1,1 +1,23 @@
-<p>menu works!</p>
+<div class="sidebar">
+  <div class="header">
+    <div class="logo-container">
+      <img src="img/logo-removebg-preview.png" alt="Logo" />
+    </div>
+    <h1>Foodie</h1>
+  </div>
+
+  <div *ngFor="let module of modules" class="module">
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton{{ module.moduleName }}" data-bs-toggle="dropdown" aria-expanded="false">
+        {{ module.moduleName }}
+      </button>
+      <ul class="dropdown-menu" *ngIf="module.views.length > 0">
+        <li *ngFor="let view of module.views">
+          <a class="dropdown-item" (click)="navegation(view.route)">{{ view.viewName }}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <button class="btn btn-danger" (click)="logOut()">Cerrar Sesión</button>
+</div>

@@ -1,0 +1,11 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  display: flex; /* Utiliza flexbox para alinear el sidebar y el contenido */
+}
+
+.app-container {
+  display: flex;
+  flex-direction: row; /* Alinea el sidebar y el contenido uno al lado del otro */
+  height: 100vh; /* Asegúrate de que ocupe toda la altura */
+}

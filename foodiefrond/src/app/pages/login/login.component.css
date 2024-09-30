@@ -1,0 +1,83 @@
+body {
+  background-color: #f5ebe1;
+  font-family: 'Arial', sans-serif;
+}
+
+.login-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.login-card {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  max-width: 500px;
+  width: 100%;
+  position: relative;
+}
+
+.login-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(-51%, 41%);
+  width: 700px;
+  height: auto;
+}
+
+.login-form {
+  margin-left: 4rem;
+}
+
+.form-control {
+  border-radius: 25px;
+  padding: 0.75rem 1.5rem;
+}
+
+.btn-custom {
+  background-color: #28a745;
+  border: none;
+  border-radius: 25px;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  width: 100%;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.social-icons a {
+  text-decoration: none;
+  color: #495057;
+  font-size: 1.5rem;
+}
+
+.signup-link {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.signup-link a {
+  color: #28a745;
+  text-decoration: none;
+  font-weight: bold;
+}
+.imagen-log{
+  height: auto;
+  width: 109px;
+  transform: translate(120%, -2%);
+  background-color: #FF3D00;
+  border-radius: 50%;
+}
+.campo{
+  z-index: 1;
+  position: relative;
+}

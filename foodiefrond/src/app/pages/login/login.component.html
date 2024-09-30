@@ -1,0 +1,28 @@
+<div class="login-container">
+  <div class="login-card">
+      <img src="img/3dapuntando.png" alt="Illustration" class="login-image">
+      <div class="login-form">
+          <div class="imagen-log">
+            <img src="img/logo-removebg-preview.png" width="100%" height="100%" alt="">
+          </div>
+          <h2 class="text-center mb-4">Log in</h2>
+          <p class="text-center">Hello, friend! I'm Smarttime - task manager you can trust everything. Let's get in touch!</p>
+          <form (ngSubmit)="login()">
+              <div class="mb-3">
+                <input type="email" [(ngModel)]="nombreUsuario" [ngModelOptions]="{standalone:true}" class="campo form-control" placeholder="Email">
+              </div>
+              <div class="mb-3">
+                <input type="password" [(ngModel)]="contrasena" [ngModelOptions]="{standalone:true}" class="campo form-control" placeholder="Password">
+              </div>
+              <button type="submit" class="campo btn btn-custom">Let's start!</button>
+          </form>
+          <div class="social-icons">
+              <a href="#"><i class="bi bi-facebook"></i></a>
+              <a href="#"><i class="bi bi-google"></i></a>
+          </div>
+          <div class="signup-link">
+              <p>Don't have an account? <a href="#">Sign up</a></p>
+          </div>
+      </div>
+  </div>
+</div>

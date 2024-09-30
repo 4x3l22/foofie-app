@@ -1,1 +1,82 @@
-<p>landing works!</p>
+<nav class="navbar navbar-expand-lg navbar-custom">
+  <div class="container-fluid d-flex justify-content-between align-items-center">
+    <!-- Imagen del logo a la izquierda -->
+    <div class="imagenlogo">
+      <img src="img/logo-removebg-preview.png" width="100%" height="100%" alt="Logo">
+    </div>
+
+    <!-- Botón de colapso (para dispositivos móviles) -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Elementos de navegación centrados -->
+    <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+      <ul class="navbar-nav mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Features</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Recipes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" aria-disabled="true">About Us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" aria-disabled="true">News</a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Botón de login a la derecha -->
+    <div class="d-flex ms-auto">
+      <button class="btn btn-success" (click)="gotologin()">Login</button>
+    </div>
+  </div>
+</nav>
+<section class="container-xxl pt">
+  <div class="row">
+    <div class="col-6 medio">
+        <div class="textos">
+          <h1>Discover and Share Delicious Recipes</h1>
+          <p>FoodHub is a modern and intuitive platform that connects food lovers,
+            home cooks, and professional chefs. Explore a diverse collection of recipes
+            share your creations, and connect with a vibrant community.</p>
+          <div class="botones">
+            <button class="btn btn-dark">Download on Adroid</button>
+            <button class="btn btn-dark bt">Download on iOS</button>
+
+          </div>
+        </div>
+    </div>
+    <div class="col-6 image">
+      <div class="imagen">
+        <img src="img/Gojo 🥖🥖.jpeg" width="100%" height="100%" alt="">
+      </div>
+    </div>
+  </div>
+</section>
+<section class="container-xxl pt">
+  <div class="row">
+    <div class="col-6">
+      <div class="textos">
+        <h2>Our Mission: Bringing People Together Through Food</h2>
+        <p>At FoodHub, we believe that food has the power to connect people,
+          foster community, and inspire creativity. Our mission is to create a
+          platform that celebrates the joy of cooking, sharing, and discovering new culinary experiences.</p>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="primero">
+        <div class="circulo"><i class="bi bi-cloud-fog white"></i></div>
+        <div class="info">
+          <h5>Diverse Recipes</h5>
+          <p>Explore a wide range of cuisines, dietary preferences, and cooking styles.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
