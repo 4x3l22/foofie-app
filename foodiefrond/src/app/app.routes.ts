@@ -4,6 +4,7 @@ import { LandingComponent } from './pages/landing/landing.component';
 import { StarComponent } from './pages/star/star.component';
 import { authGuard } from './guards/auth.guard';
 import { HomeComponent } from './pages/home/home.component';
+import { ModuloComponent } from './pages/modulo/modulo.component';
 
 export const routes: Routes = [
   {  path: 'login', component: LoginComponent },
@@ -14,7 +15,8 @@ export const routes: Routes = [
     component: StarComponent,
     canActivate: [authGuard],
     children: [
-      { path: 'home', component: HomeComponent}
+      { path: 'home', component: HomeComponent},
+      { path: 'modulo', component: ModuloComponent}
     ]
   },
   { path: '**', redirectTo: 'login' }
