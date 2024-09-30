@@ -9,7 +9,9 @@ html, body {
 }
 
 app-menu {
-  width: 250px;           /* Ancho fijo para el menú */
+  width: 250px;
+  z-index: 1;
+  margin-right: 12px;
 }
 
 /* router-outlet {

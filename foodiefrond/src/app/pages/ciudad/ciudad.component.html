@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <div class="encabezado">
-    <h1>Modulo</h1>
+    <h1>Ciudad</h1>
     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" id="btnAgregar">
       <i class="bi bi-plus-circle"></i> Agregar
     </button>
@@ -16,13 +16,13 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of modulos;">
+        <tr *ngFor="let item of ciudades;">
           <td>{{item.nombre}}</td>
           <td>{{item.descripcion}}</td>
           <td>{{item.estado}}</td>
           <td class="dp">
-            <button class="btn btn-danger" (click)="eliminarModulo(item.id)"><i class="bi bi-trash"></i></button>
-            <button class="btn btn-warning" (click)="cargarModulo(item)" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-pencil-square"></i></button>
+            <button class="btn btn-danger" (click)="eliminarCiudad(item.id)"><i class="bi bi-trash"></i></button>
+            <button class="btn btn-warning" (click)="cargarCiudad(item)" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-pencil-square"></i></button>
           </td>
         </tr>
       </tbody>
@@ -38,26 +38,38 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form [formGroup]="moduleForm" (ngSubmit)="registrarModulo()">
+        <form [formGroup]="cityForm" (ngSubmit)="registrarCiudad()">
           <div class="row">
             <div class="col-6">
               <label class="form-label" for="nombre">Nombre</label>
               <input type="text" class="form-control" formControlName="nombre" placeholder="Nombre">
-              <div *ngIf="moduleForm.get('nombre')?.invalid && moduleForm.get('nombre')?.touched" class="text-danger">
+              <div *ngIf="cityForm.get('nombre')?.invalid && cityForm.get('nombre')?.touched" class="text-danger">
                 El nombre es obligatorio.
               </div>
             </div>
             <div class="col-6">
               <label class="form-label" for="descripcion">Descripción</label>
-              <input type="text" class="form-control" formControlName="description" placeholder="Descripción">
-              <div *ngIf="moduleForm.get('description')?.invalid && moduleForm.get('description')?.touched" class="text-danger">
+              <input type="text" class="form-control" formControlName="descripcion" placeholder="Descripción">
+              <div *ngIf="cityForm.get('descripcion')?.invalid && cityForm.get('descripcion')?.touched" class="text-danger">
                 La descripción es obligatoria.
+              </div>
+            </div>
+            <div class="col-6">
+              <label class="form-label" for="paisId">País</label>
+              <select class="form-control" formControlName="paisId" required>
+                <option value="" disabled selected>Seleccione un continente</option>
+                <option *ngFor="let paises of paises" [value]="paises.id">
+                  {{ paises.nombre }}
+                </option>
+              </select>
+              <div *ngIf="cityForm.get('paisId')?.invalid && cityForm.get('paisId')?.touched" class="text-danger">
+                El ID del país es obligatorio.
               </div>
             </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            <button type="submit" class="btn btn-primary" [disabled]="moduleForm.invalid">Guardar</button>
+            <button type="submit" class="btn btn-primary" [disabled]="cityForm.invalid">Guardar</button>
           </div>
         </form>
       </div>

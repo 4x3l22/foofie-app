@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <div class="encabezado">
-    <h1>Modulo</h1>
+    <h1>Ingredientes</h1>
     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" id="btnAgregar">
       <i class="bi bi-plus-circle"></i> Agregar
     </button>
@@ -16,13 +16,13 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of modulos;">
+        <tr *ngFor="let item of ingredientes;">
           <td>{{item.nombre}}</td>
           <td>{{item.descripcion}}</td>
           <td>{{item.estado}}</td>
           <td class="dp">
-            <button class="btn btn-danger" (click)="eliminarModulo(item.id)"><i class="bi bi-trash"></i></button>
-            <button class="btn btn-warning" (click)="cargarModulo(item)" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-pencil-square"></i></button>
+            <button class="btn btn-danger" (click)="eliminarIngrediente(item.id)"><i class="bi bi-trash"></i></button>
+            <button class="btn btn-warning" (click)="cargarIngrediente(item)" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-pencil-square"></i></button>
           </td>
         </tr>
       </tbody>
@@ -34,30 +34,30 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Registro</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Registro de Ingrediente</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form [formGroup]="moduleForm" (ngSubmit)="registrarModulo()">
+        <form [formGroup]="ingredientForm" (ngSubmit)="registrarIngrediente()">
           <div class="row">
             <div class="col-6">
               <label class="form-label" for="nombre">Nombre</label>
               <input type="text" class="form-control" formControlName="nombre" placeholder="Nombre">
-              <div *ngIf="moduleForm.get('nombre')?.invalid && moduleForm.get('nombre')?.touched" class="text-danger">
+              <div *ngIf="ingredientForm.get('nombre')?.invalid && ingredientForm.get('nombre')?.touched" class="text-danger">
                 El nombre es obligatorio.
               </div>
             </div>
             <div class="col-6">
               <label class="form-label" for="descripcion">Descripción</label>
-              <input type="text" class="form-control" formControlName="description" placeholder="Descripción">
-              <div *ngIf="moduleForm.get('description')?.invalid && moduleForm.get('description')?.touched" class="text-danger">
+              <input type="text" class="form-control" formControlName="descripcion" placeholder="Descripción">
+              <div *ngIf="ingredientForm.get('descripcion')?.invalid && ingredientForm.get('descripcion')?.touched" class="text-danger">
                 La descripción es obligatoria.
               </div>
             </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            <button type="submit" class="btn btn-primary" [disabled]="moduleForm.invalid">Guardar</button>
+            <button type="submit" class="btn btn-primary" [disabled]="ingredientForm.invalid">Guardar</button>
           </div>
         </form>
       </div>
