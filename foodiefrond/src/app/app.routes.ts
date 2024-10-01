@@ -14,6 +14,8 @@ import { MediosPagoComponent } from './pages/mediospago/mediospago.component';
 import { PlanesComponent } from './pages/planes/planes.component';
 import { RolComponent } from './pages/rol/rol.component';
 import { VistaComponent } from './pages/vista/vista.component';
+import { RolVistaComponent } from './pages/rolvista/rolvista.component';
+import { TipoDocumentoComponent } from './pages/tipodocumento/tipodocumento.component';
 
 export const routes: Routes = [
   {  path: 'login', component: LoginComponent },
@@ -35,7 +37,8 @@ export const routes: Routes = [
       { path: 'planes', component: PlanesComponent},
       { path: 'rol', component:  RolComponent},
       { path: 'vista', component:  VistaComponent },
-
+      { path: 'rolvista', component: RolVistaComponent},
+      { path: 'tipodocumento', component: TipoDocumentoComponent}
 
     ]
   },

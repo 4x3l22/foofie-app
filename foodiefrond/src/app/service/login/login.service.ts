@@ -33,7 +33,6 @@ export class LoginService {
 
   isLoggedIn(): boolean{
     const userData = localStorage.getItem('user');
-    // console.log('User data in localStorage:', userData);
     return userData !== null;
   }
 
