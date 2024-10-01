@@ -1,0 +1,70 @@
+<div class="container-fluid">
+  <div class="encabezado">
+    <h1>Tipo de Cocina</h1>
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" id="btnAgregar">
+      <i class="bi bi-plus-circle"></i> Agregar
+    </button>
+  </div>
+  <div class="tabla">
+    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dttrigger" class="table table-striped table-hover">
+      <thead class="table-dark">
+        <tr>
+          <th>Nombre</th>
+          <th>Descripción</th>
+          <th>Estado</th>
+          <th>Funciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of tiposCocina;">
+          <td>{{ item.nombre }}</td>
+          <td>{{ item.descripcion }}</td>
+          <td>{{ item.estado ? 'Activo' : 'Inactivo' }}</td>
+          <td class="dp">
+            <button class="btn btn-danger" (click)="eliminarTipoCocina(item.id)">
+              <i class="bi bi-trash"></i>
+            </button>
+            <button class="btn btn-warning" (click)="cargarTipoCocina(item)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              <i class="bi bi-pencil-square"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Registro de Tipo de Cocina</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="tipoCocinaForm" (ngSubmit)="registrarTipoCocina()">
+          <div class="row">
+            <div class="col-6">
+              <label class="form-label" for="nombre">Nombre</label>
+              <input type="text" class="form-control" formControlName="nombre" placeholder="Nombre" />
+              <div *ngIf="tipoCocinaForm.get('nombre')?.invalid && tipoCocinaForm.get('nombre')?.touched" class="text-danger">
+                El nombre es obligatorio.
+              </div>
+            </div>
+            <div class="col-6">
+              <label class="form-label" for="descripcion">Descripción</label>
+              <input type="text" class="form-control" formControlName="descripcion" placeholder="Descripción" />
+              <div *ngIf="tipoCocinaForm.get('descripcion')?.invalid && tipoCocinaForm.get('descripcion')?.touched" class="text-danger">
+                La descripción es obligatoria.
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="submit" class="btn btn-primary" [disabled]="tipoCocinaForm.invalid">Guardar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

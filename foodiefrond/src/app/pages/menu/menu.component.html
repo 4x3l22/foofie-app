@@ -6,16 +6,23 @@
     <h1>Foodie</h1>
   </div>
 
-  <div *ngFor="let module of modules" class="module">
-    <div class="dropdown">
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton{{ module.moduleName }}" data-bs-toggle="dropdown" aria-expanded="false">
-        {{ module.moduleName }}
-      </button>
-      <ul class="dropdown-menu" *ngIf="module.views.length > 0">
-        <li *ngFor="let view of module.views">
-          <a class="dropdown-item" (click)="navegation(view.route)">{{ view.viewName }}</a>
-        </li>
-      </ul>
+  <div class="accordion" id="accordionMenu">
+    <div *ngFor="let module of modules; let i = index" class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button" type="button" (click)="openModule(i)" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse' + i" [attr.aria-expanded]="isOpen === i" [attr.aria-controls]="'collapse' + i">
+          <span class="df" [innerHTML]="module.moduleIcon"></span>{{ module.moduleName }}
+        </button>
+      </h2>
+      <div [id]="'collapse' + i" class="accordion-collapse collapse" [ngClass]="{'show': isOpen === i}" data-bs-parent="#accordionMenu">
+        <div class="accordion-body">
+          <ul>
+            <li class="ul" *ngFor="let view of module.views">
+              <span  class="df" [innerHTML]="view.viewIcon"></span>
+              <a (click)="navegation(view.route)" class="nav-link">{{ view.viewName }}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 

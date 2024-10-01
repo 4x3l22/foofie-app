@@ -13,7 +13,8 @@ import { CommonModule } from '@angular/common';
 })
 export class MenuComponent {
 
-  modules: { moduleName: string, views: { viewName: string, route: string }[] }[] = [];
+  modules: { moduleName: string, moduleIcon: string, views: { viewName: string, viewIcon: string, route: string }[] }[] = [];
+  isOpen: number | null = null;
 
   constructor(private router: Router) {}
 
@@ -40,26 +41,32 @@ export class MenuComponent {
     }
   }
 
+  openModule(index: number): void {
+    // Alternar el módulo abierto
+    this.isOpen = this.isOpen === index ? null : index;
+  }
+
   isString(value: any): value is string {
     return typeof value === 'string';
   }
 
   // Agrupar las vistas por módulo
-  groupByModule(menuDto: MenuDto[]): { moduleName: string, views: { viewName: string, route: string }[] }[] {
+  groupByModule(menuDto: MenuDto[]): { moduleName: string, moduleIcon: string, views: { viewName: string,  viewIcon: string, route: string }[] }[] {
+
     const grouped = menuDto.reduce((acc, view) => {
       if (!acc[view.moduloId]) {
-        acc[view.moduloId] = { moduleName: view.nombreModulo, views: [] };
+        acc[view.moduloId] = { moduleName: view.nombreModulo, moduleIcon: view.moduloIconos, views: [] }; // Agregar el ícono del módulo
       }
-      // Crear ruta en formato 'main/nombreDeLaVista'
+      // Crear ruta en formato 'star/nombreDeLaVista'
       const route = `star/${view.nombreVista.toLowerCase()}`;
-      console.log("rutas "+route);
-      if(!this.isString(route)){
+      if (!this.isString(route)) {
         console.error(`Ruta no válida: ${route}`);
         return acc;
       }
-      acc[view.moduloId].views.push({ viewName: view.nombreVista, route });
+      acc[view.moduloId].views.push({ viewName: view.nombreVista, viewIcon:  view.vistaIconos, route });
+
       return acc;
-    }, {} as { [moduleId: number]: { moduleName: string, views: { viewName: string, route: string }[] } });
+    }, {} as { [moduleId: number]: { moduleName: string, moduleIcon: string, views: { viewName: string, viewIcon: string, route: string }[] } });
 
     // Convertir el objeto agrupado en un array
     return Object.values(grouped);

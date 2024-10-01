@@ -1,0 +1,15 @@
+.tabla{
+  width: 25cm;
+}
+.encabezado{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 20px 0 60px 0px;
+}
+.dp{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}

@@ -1,13 +1,3 @@
-/* Asegúrate de que el sidebar ocupa toda la altura */
-.sidebar {
-  width: 250px;
-  height: 100vh; /* 100% de la altura de la ventana */
-  background-color: #343a40;
-  padding: 20px;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-  position: fixed; /* Fija el sidebar */
-}
-
 .header {
   display: flex;
   align-items: center;
@@ -38,14 +28,74 @@
 .module {
   margin-bottom: 15px;
 }
-
-.btn-danger {
-  width: 100%; /* Para que el botón ocupe todo el ancho */
-  margin-top: auto; /* Alinea el botón al final del sidebar */
-}
-
 /* Asegúrate de que el body y html tengan 100% de altura */
 html, body {
   height: 100%;
   margin: 0;
+}
+
+.sidebar {
+  width: 250px;
+  height: 100vh; /* 100% de la altura de la ventana */
+  background-color: #343a40;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  position: fixed; /* Fija el sidebar */
+
+  display: flex; /* Añade flexbox */
+  flex-direction: column; /* Coloca los elementos en columna */
+  justify-content: space-between; /* Distribuye el contenido dejando el botón al final */
+}
+
+.accordion {
+  flex-grow: 1; /* Hace que el acordeón ocupe el espacio disponible */
+  margin-bottom: 20px; /* Añade un pequeño margen inferior */
+}
+
+.btn-danger {
+  width: 100%; /* Para que el botón ocupe todo el ancho */
+  margin-top: auto; /* Se asegura de que esté al final del sidebar */
+}
+/* acordeon */
+
+.accordion-item {
+  background-color: #343a40 !important;
+  border: none; /* Elimina los bordes del acordeón */
+}
+
+.accordion-header {
+  background-color: #343a40 !important;
+}
+
+.accordion-button {
+  background-color: #343a40 !important;
+  color: #ffffff !important;
+  border: none; /* Elimina los bordes del botón */
+}
+
+.accordion-button:not(.collapsed) {
+  color: #ffffff; /* Color del texto cuando el acordeón está abierto */
+  background-color: #495057 !important; /* Color del fondo cuando el acordeón está abierto */
+}
+
+.accordion-body {
+  background-color: #343a40 !important;
+  color: #ffffff; /* Color del texto dentro del cuerpo del acordeón */
+}
+
+.accordion-button:focus {
+  box-shadow: none; /* Elimina el borde azul de enfoque */
+}
+.df{
+  margin-right: 5px;
+}
+li{
+  list-style: none;
+  margin-bottom: 10px;
+}
+.ul{
+  display: flex;
+}
+ul{
+  padding-left: 1rem;
 }

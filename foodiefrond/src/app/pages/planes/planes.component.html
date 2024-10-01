@@ -1,0 +1,88 @@
+<div class="container-fluid">
+  <div class="encabezado">
+    <h1>Planes</h1>
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" id="btnAgregar">
+      <i class="bi bi-plus-circle"></i> Agregar
+    </button>
+  </div>
+  <div class="tabla">
+    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dttrigger" class="table table-striped table-hover">
+      <thead class="table-dark">
+        <tr>
+          <th>Nombre</th>
+          <th>Descripción</th>
+          <th>Precio</th>
+          <th>Medio de Pago</th>
+          <th>Funciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let plan of planes;">
+          <td>{{ plan.nombre }}</td>
+          <td>{{ plan.descripcion }}</td>
+          <td>{{ plan.precio }}</td>
+          <td>{{ plan.mediospagoId }}</td>
+          <td class="dp">
+            <button class="btn btn-danger" (click)="eliminarPlan(plan.id)"><i class="bi bi-trash"></i></button>
+            <button class="btn btn-warning" (click)="cargarPlan(plan)" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-pencil-square"></i></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Modal para agregar y actualizar plan -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Registro de Plan</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="planForm" (ngSubmit)="registrarPlan()">
+          <div class="row">
+            <div class="col-6">
+              <label class="form-label" for="nombre">Nombre</label>
+              <input type="text" class="form-control" formControlName="nombre" placeholder="Nombre">
+              <div *ngIf="planForm.get('nombre')?.invalid && planForm.get('nombre')?.touched" class="text-danger">
+                El nombre es obligatorio.
+              </div>
+            </div>
+            <div class="col-6">
+              <label class="form-label" for="descripcion">Descripción</label>
+              <input type="text" class="form-control" formControlName="descripcion" placeholder="Descripción">
+              <div *ngIf="planForm.get('descripcion')?.invalid && planForm.get('descripcion')?.touched" class="text-danger">
+                La descripción es obligatoria.
+              </div>
+            </div>
+            <div class="col-6">
+              <label class="form-label" for="precio">Precio</label>
+              <input type="number" class="form-control" formControlName="precio" placeholder="Precio">
+              <div *ngIf="planForm.get('precio')?.invalid && planForm.get('precio')?.touched" class="text-danger">
+                El precio es obligatorio.
+              </div>
+            </div>
+            <div class="col-6">
+              <label class="form-label" for="mediospagoId">Medio de Pago</label>
+              <select class="form-control" formControlName="mediospagoId" required>
+                <option value="" disabled selected>Seleccione un medio de pago</option>
+                <option *ngFor="let medio of mediosPago" [value]="medio.id">
+                  {{ medio.nombre }}
+                </option>
+              </select>
+              <div *ngIf="planForm.get('mediospagoId')?.invalid && planForm.get('mediospagoId')?.touched" class="text-danger">
+                El medio de pago es obligatorio.
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

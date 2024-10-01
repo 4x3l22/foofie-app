@@ -9,6 +9,9 @@ import { ContinenteComponent } from './pages/continente/continente.component';
 import { PaisComponent } from './pages/pais/pais.component';
 import { CiudadComponent } from './pages/ciudad/ciudad.component';
 import { IngredientesComponent } from './pages/ingredientes/ingredientes.component';
+import { TipoCocinaComponent } from './pages/tiposcocina/tiposcocina.component';
+import { MediosPagoComponent } from './pages/mediospago/mediospago.component';
+import { PlanesComponent } from './pages/planes/planes.component';
 
 export const routes: Routes = [
   {  path: 'login', component: LoginComponent },
@@ -24,9 +27,10 @@ export const routes: Routes = [
       { path: 'continente'  , component: ContinenteComponent },
       { path: 'pais', component: PaisComponent},
       { path: 'ciudad', component: CiudadComponent},
-      { path: 'ingredientes', component:  IngredientesComponent}
-
-
+      { path: 'ingredientes', component:  IngredientesComponent},
+      { path: 'tiposcocina',  component: TipoCocinaComponent},
+      { path: 'mediospago', component: MediosPagoComponent},
+      { path: 'planes', component: PlanesComponent}
     ]
   },
   { path: '**', redirectTo: 'login' }
