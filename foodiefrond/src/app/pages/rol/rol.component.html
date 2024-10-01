@@ -1,0 +1,70 @@
+<div class="container-fluid">
+  <div class="encabezado">
+    <h1>Roles</h1>
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#rolModal">
+      <i class="bi bi-plus-circle"></i> Agregar Rol
+    </button>
+  </div>
+
+  <div class="tabla">
+    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-striped table-hover">
+      <thead class="table-dark">
+        <tr>
+          <th>Nombre</th>
+          <th>Descripción</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let rol of roles">
+          <td>{{ rol.nombre }}</td>
+          <td>{{ rol.descripcion }}</td>
+          <td>{{ rol.estado ? 'Activo' : 'Inactivo' }}</td>
+          <td class="dp">
+            <button class="btn btn-warning" (click)="cargarRol(rol)" data-bs-toggle="modal" data-bs-target="#rolModal">
+              <i class="bi bi-pencil-square"></i>
+            </button>
+            <button class="btn btn-danger" (click)="eliminarRol(rol.id)">
+              <i class="bi bi-trash"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Modal para registrar o editar un rol -->
+<div class="modal fade" id="rolModal" tabindex="-1" aria-labelledby="rolModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="rolModalLabel">Registro de Rol</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="rolForm" (ngSubmit)="registrarRol()">
+          <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" id="nombre" class="form-control" formControlName="nombre" placeholder="Nombre del rol">
+            <div *ngIf="rolForm.get('nombre')?.invalid && rolForm.get('nombre')?.touched" class="text-danger">
+              El nombre es obligatorio.
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="descripcion" class="form-label">Descripción</label>
+            <input type="text" id="descripcion" class="form-control" formControlName="descripcion" placeholder="Descripción del rol">
+            <div *ngIf="rolForm.get('descripcion')?.invalid && rolForm.get('descripcion')?.touched" class="text-danger">
+              La descripción es obligatoria.
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="submit" class="btn btn-primary" [disabled]="rolForm.invalid">Guardar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

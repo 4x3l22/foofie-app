@@ -12,6 +12,8 @@ import { IngredientesComponent } from './pages/ingredientes/ingredientes.compone
 import { TipoCocinaComponent } from './pages/tiposcocina/tiposcocina.component';
 import { MediosPagoComponent } from './pages/mediospago/mediospago.component';
 import { PlanesComponent } from './pages/planes/planes.component';
+import { RolComponent } from './pages/rol/rol.component';
+import { VistaComponent } from './pages/vista/vista.component';
 
 export const routes: Routes = [
   {  path: 'login', component: LoginComponent },
@@ -30,7 +32,11 @@ export const routes: Routes = [
       { path: 'ingredientes', component:  IngredientesComponent},
       { path: 'tiposcocina',  component: TipoCocinaComponent},
       { path: 'mediospago', component: MediosPagoComponent},
-      { path: 'planes', component: PlanesComponent}
+      { path: 'planes', component: PlanesComponent},
+      { path: 'rol', component:  RolComponent},
+      { path: 'vista', component:  VistaComponent },
+
+
     ]
   },
   { path: '**', redirectTo: 'login' }
