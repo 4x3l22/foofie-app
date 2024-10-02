@@ -16,10 +16,12 @@ import { RolComponent } from './pages/rol/rol.component';
 import { VistaComponent } from './pages/vista/vista.component';
 import { RolVistaComponent } from './pages/rolvista/rolvista.component';
 import { TipoDocumentoComponent } from './pages/tipodocumento/tipodocumento.component';
+import { SignupComponent } from './pages/signup/signup.component';
 
 export const routes: Routes = [
   {  path: 'login', component: LoginComponent },
   {  path: 'landing', component:  LandingComponent },
+  {  path: 'singup', component: SignupComponent},
   {   path: '', redirectTo: 'landing', pathMatch: 'full' },
   {
     path: 'star',

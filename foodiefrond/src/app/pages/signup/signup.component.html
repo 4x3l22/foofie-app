@@ -1,0 +1,90 @@
+<div class="container-xl">
+  <div class="contenedor">
+    <div class="progress-container">
+      <div class="progress-bar step-1" [class.completed]="personaForm.valid"></div>
+      <div class="progress-bar step-2"></div>
+    </div>
+    <h2>Registro de Datos Personales</h2>
+    <form [formGroup]="personaForm" (ngSubmit)="completarPaso()" id="registroForm">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="primerNombre">Primer Nombre</label>
+          <input type="text" id="primerNombre" formControlName="primerNombre" placeholder="Ingrese su primer nombre">
+          <div *ngIf="personaForm.get('primerNombre')?.invalid && personaForm.get('primerNombre')?.touched" class="text-danger">
+            El primer nombre es obligatorio
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="segundoNombre">Segundo Nombre</label>
+          <input type="text" id="segundoNombre" formControlName="segundoNombre" placeholder="Ingrese su segundo nombre">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="primerApellido">Primer Apellido</label>
+          <input type="text" id="primerApellido" formControlName="primerApellido" placeholder="Ingrese su primer apellido">
+          <div *ngIf="personaForm.get('primerApellido')?.invalid && personaForm.get('primerApellido')?.touched" class="text-danger">
+            El primer apellido es obligatorio
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="segundoApellido">Segundo Apellido</label>
+          <input type="text" id="segundoApellido" formControlName="segundoApellido" placeholder="Ingrese su segundo apellido">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="genero">Género</label>
+          <select id="genero" formControlName="genero">
+            <option value="">Seleccione su género</option>
+            <option value="masculino">Masculino</option>
+            <option value="femenino">Femenino</option>
+            <option value="otro">Otro</option>
+          </select>
+          <div *ngIf="personaForm.get('genero')?.invalid && personaForm.get('genero')?.touched" class="text-danger">
+            Seleccione su género
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="documentoId">Tipo de Documento</label>
+          <select id="documentoId" formControlName="documentoId">
+            <option value="">Seleccione el tipo de documento</option>
+            <!-- Aquí se insertarán los tipos de documento dinámicamente -->
+          </select>
+          <div *ngIf="personaForm.get('documentoId')?.invalid && personaForm.get('documentoId')?.touched" class="text-danger">
+            Seleccione el tipo de documento
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="numeroDocumento">Número de Documento</label>
+          <input type="number" id="numeroDocumento" formControlName="numeroDocumento" placeholder="Ingrese su número de documento">
+          <div *ngIf="personaForm.get('numeroDocumento')?.invalid && personaForm.get('numeroDocumento')?.touched" class="text-danger">
+            Ingrese un número de documento válido
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="cumpleanios">Fecha de Nacimiento</label>
+          <input type="date" id="cumpleanios" formControlName="cumpleanios">
+          <div *ngIf="personaForm.get('cumpleanios')?.invalid && personaForm.get('cumpleanios')?.touched" class="text-danger">
+            Ingrese una fecha válida
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="ciudadId">Ciudad</label>
+        <select id="ciudadId" formControlName="ciudadId">
+          <option value="">Seleccione su ciudad</option>
+          <!-- Aquí se insertarán las ciudades dinámicamente -->
+        </select>
+        <div *ngIf="personaForm.get('ciudadId')?.invalid && personaForm.get('ciudadId')?.touched" class="text-danger">
+          Seleccione su ciudad
+        </div>
+      </div>
+      <div class="form-actions">
+        <button type="submit" class="btn-submit" [disabled]="personaForm.invalid">Siguiente</button>
+      </div>
+    </form>
+  </div>
+</div>
