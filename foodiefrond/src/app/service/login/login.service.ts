@@ -32,12 +32,9 @@ export class LoginService {
   }
 
   isLoggedIn(): boolean{
-    if(typeof window ==  'undefined' && localStorage){
-      const userData = localStorage.getItem('user');
-      return userData !== null;
 
-    }
-    return  false;
+    const userData = localStorage.getItem('user');
+    return userData !== null;
 
   }
 

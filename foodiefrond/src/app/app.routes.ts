@@ -17,6 +17,7 @@ import { VistaComponent } from './pages/vista/vista.component';
 import { RolVistaComponent } from './pages/rolvista/rolvista.component';
 import { TipoDocumentoComponent } from './pages/tipodocumento/tipodocumento.component';
 import { SignupComponent } from './pages/signup/signup.component';
+import { IniciousuarioComponent } from './pages/iniciousuario/iniciousuario.component';
 
 export const routes: Routes = [
   {  path: 'login', component: LoginComponent },
@@ -43,6 +44,11 @@ export const routes: Routes = [
       { path: 'tipodocumento', component: TipoDocumentoComponent}
 
     ]
+  },
+  {
+    path: 'iniouser',
+    component: IniciousuarioComponent,
+    canActivate: [authGuard]
   },
   { path: '**', redirectTo: 'login' }
 ];

@@ -107,3 +107,30 @@ input:focus, select:focus {
     flex-direction: column;
   }
 }
+
+input[type="date"] {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #343a40;
+  font-family: 'Arial', sans-serif;
+  font-size: 16px;
+  width: 100%;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  background-color: #FF3D00;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+input[type="date"]:hover {
+  border-color: #FF3D00;
+}
+
+input[type="date"]:focus {
+  border-color: #FF3D00;
+  outline: none;
+  box-shadow: 0 0 5px rgba(255, 61, 0, 0.5);
+}

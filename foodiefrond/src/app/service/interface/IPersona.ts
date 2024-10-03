@@ -7,6 +7,11 @@ export interface IPersona {
   genero: string;
   documentoId: number;
   numeroDocumento: number;
-  cumpleanios: Date;
+  cumpleanios: Date | string;
+  estado: boolean;
   ciudadId: number;
+  fechaCreo:  Date;
+  fechaModifico:  Date | null;
+  fechaElimino:   Date | null;
+
 }

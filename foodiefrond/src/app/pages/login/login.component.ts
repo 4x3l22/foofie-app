@@ -19,12 +19,20 @@ export class LoginComponent {
   constructor(private authService: LoginService, private router:  Router) { }
 
   login(): void {
-    // alert('Usuario: '+this.nombreUsuario+'\nContraseña: '+ this.contrasena);
-
     this.authService.login(this.nombreUsuario, this.contrasena).subscribe(
       (response) => {
         if (response.success) {
-          this.router.navigate(['star']);
+          const user = response; // Guarda el objeto completo que has recibido
+          localStorage.setItem('user', JSON.stringify(user)); // Guarda en localStorage
+
+          const rolId = user.loginDao.rolId; // Accede a rolId desde loginDao
+
+          // Redirigir según el rol del usuario
+          if (rolId === 1) {
+            this.router.navigate(['star']); // Admin
+          } else if (rolId === 2) {
+            this.router.navigate(['iniouser']); // Usuario
+          }
         } else {
           this.mensajeError = 'Credenciales erróneas';
         }
@@ -35,7 +43,7 @@ export class LoginComponent {
     );
   }
 
-  navigateto(ruta: string){
+  navigateto(ruta: string) {
     this.router.navigate([ruta]);
   }
 }
