@@ -54,6 +54,13 @@
                 La descripción es obligatoria.
               </div>
             </div>
+            <div class="mb-3">
+              <label for="items" class="form-label">Icono</label>
+              <input type="text" formControlName="items" class="form-control" placeholder="Icono">
+              <div *ngIf="moduleForm.get('items')?.invalid && moduleForm.get('items')?.touched" class="text-danger">
+                El icono es obligatorio
+              </div>
+            </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>

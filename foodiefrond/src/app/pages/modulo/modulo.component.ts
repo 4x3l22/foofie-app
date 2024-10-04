@@ -29,7 +29,8 @@ export class ModuloComponent implements OnInit {
   ) {
     this.moduleForm = new FormGroup({
       nombre: new FormControl(null, [Validators.required]),
-      description: new FormControl(null, [Validators.required])
+      description: new FormControl(null, [Validators.required]),
+      items: new FormControl(null,  [Validators.required])
     });
   }
 
@@ -63,6 +64,7 @@ export class ModuloComponent implements OnInit {
       id: this.id ? this.id : 0,
       nombre: this.moduleForm.value.nombre,
       descripcion: this.moduleForm.value.description,
+      items: this.moduleForm.value.items,
       estado: true,
       fechaCreo: this.id ? this.modulos.find(mod => mod.id === this.id)?.fechaCreo : new Date(),
       fechaModifico: this.id ? new Date() : null,

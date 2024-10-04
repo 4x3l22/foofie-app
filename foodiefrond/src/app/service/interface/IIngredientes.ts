@@ -5,5 +5,5 @@ export interface IIngrediente {
   estado: boolean;
   fechaCreo: Date | null | undefined;
   fechaModifico: Date | null;
-  fechaElimino?: Date | null;  // Puede ser null si aún no ha sido eliminado
+  fechaElimino?: Date | null;
 }

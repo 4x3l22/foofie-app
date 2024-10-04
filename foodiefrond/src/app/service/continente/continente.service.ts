@@ -8,7 +8,7 @@ import { IContinente } from '../interface/IContinente';
 })
 export class ContinenteService {
 
-  private url = 'http://localhost:5165/api/ControllerContinente';
+  private url = 'http://localhost:9191/api/ControllerContinente';
 
   constructor(private http :  HttpClient) { }
 

@@ -8,7 +8,7 @@ import { ITipoDocumento } from '../interface/ITipoDocumento';
 })
 export class TipodocumentoService {
 
-  private url = 'http://localhost:5165/api/ControllerTipoDocumento';
+  private url = 'http://localhost:9191/api/ControllerTipoDocumento';
 
   constructor(private http :  HttpClient) { }
 

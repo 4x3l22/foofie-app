@@ -8,7 +8,8 @@ import { Observable } from 'rxjs';
 })
 export class IngredientesService {
 
-  private url = 'http://localhost:5165/api/ControllerIngredientes';
+  private url = 'http://localhost:9191/api/ControllerIngredientes';
+  private msv = '/cargar-masiva';
 
   constructor(private http :  HttpClient) { }
 
@@ -17,11 +18,16 @@ export class IngredientesService {
   }
 
   save(module: IIngrediente): Observable<IIngrediente>{
-
     const  headers = {'Content-Type': 'application/json'};
     return  this.http.post<IIngrediente>(this.url, module, {headers: headers});
 
   }
+
+  saveMSV(ingredientes: IIngrediente[]):  Observable<IIngrediente[]>{
+    const headers = {'Content-Type': 'application/json'};
+    return this.http.post<IIngrediente[]>(this.url+this.msv,  ingredientes, {headers: headers});
+  }
+
 
   update(module: IIngrediente): Observable<IIngrediente> {
     const headers = { 'Content-Type': 'application/json' };

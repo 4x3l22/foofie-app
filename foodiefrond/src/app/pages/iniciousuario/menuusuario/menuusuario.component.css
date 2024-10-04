@@ -1,0 +1,63 @@
+.imagen{
+  width: 83%;
+  height: 20rem;
+  overflow: hidden;
+  border-radius: 15px;
+}
+.pt{
+  margin-top: 80px;
+}
+.medio{
+  display: flex;
+  align-items: center;
+}
+.image{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.bt{
+  margin-left: 30px;
+}
+.white{
+  color: #fff;
+}
+.circulo{
+  background-color: #000;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+.circulo > i{
+  display: flex;
+  align-items: center;
+}
+.primero{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.tt{
+  text-decoration: none;
+  color: #fff;
+}
+.navbar-custom {
+  background-color: #FF3D00;
+}
+.imagenlogo{
+  height: 108px;
+  width: 120px;
+  overflow: hidden;
+}
+.optybtton{
+  margin-left: 30%;
+}
+li>a{
+  color: #ffffff;
+}

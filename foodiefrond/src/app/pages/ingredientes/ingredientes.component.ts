@@ -41,6 +41,10 @@ export class IngredientesComponent implements OnInit {
     };
   }
 
+  navigateTo(rura: string){
+    this.router.navigate([rura]);
+  }
+
   listarIngredientes() {
     this.service.list().subscribe({
       next: (data: IIngrediente[]) => {

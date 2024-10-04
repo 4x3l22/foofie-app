@@ -8,7 +8,7 @@ import { IMediosPago } from '../interface/IMediosPago';
 })
 export class MediospagoService {
 
-  private url = 'http://localhost:5165/api/ControllerMediosPago';
+  private url = 'http://localhost:9191/api/ControllerMediosPago';
 
   constructor(private http :  HttpClient) { }
 

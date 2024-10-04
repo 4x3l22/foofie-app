@@ -10,20 +10,20 @@ import { TipodocumentoService } from '../../service/tipodocumento/tipodocumento.
 import { ICiudad } from '../../service/interface/ICiudad';
 import { CiudadService } from '../../service/ciudad/ciudad.service';
 import { IUsuarioi } from '../../service/interface/IUsuario';
+import { UsuariorolService } from '../../service/usuariorol/usuariorol.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-signup',
   standalone: true,
   imports: [DataTablesModule, CommonModule, ReactiveFormsModule],
   templateUrl: './signup.component.html',
-  styleUrl: './signup.component.css'
+  styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-
-
   id?: number;
   persona: IPersona[] = [];
-  documentoTip: ITipoDocumento[]=[];
+  documentoTip: ITipoDocumento[] = [];
   ciudad: ICiudad[] = [];
   personaForm: FormGroup;
   usuarioForm: FormGroup;
@@ -31,24 +31,23 @@ export class SignupComponent implements OnInit {
   personaId: number | null = null;
   fotoPerfilBase64?: string;
 
-  constructor
-  (
+  constructor(
     private router: Router,
     private service: SignupService,
     private serviceTipDocumento: TipodocumentoService,
-    private serviceCiudad: CiudadService
-  )
-  {
+    private serviceCiudad: CiudadService,
+    private serviceUsuarioRol: UsuariorolService
+  ) {
     this.personaForm = new FormGroup({
-      primerNombre:  new FormControl(null,  Validators.required),
+      primerNombre: new FormControl(null, Validators.required),
       segundoNombre: new FormControl(null, Validators.required),
-      primerApellido: new  FormControl(null, Validators.required),
+      primerApellido: new FormControl(null, Validators.required),
       segundoApellido: new FormControl(null, Validators.required),
-      genero : new FormControl(null, Validators.required),
-      documentoId:  new FormControl(null, Validators.required),
-      numeroDocumento:  new FormControl(null, Validators.required),
-      cumpleanios:  new FormControl(null, Validators.required),
-      ciudadId:   new FormControl(null, Validators.required),
+      genero: new FormControl(null, Validators.required),
+      documentoId: new FormControl(null, Validators.required),
+      numeroDocumento: new FormControl(null, Validators.required),
+      cumpleanios: new FormControl(null, Validators.required),
+      ciudadId: new FormControl(null, Validators.required),
     });
 
     this.usuarioForm = new FormGroup({
@@ -60,13 +59,13 @@ export class SignupComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void{
+  ngOnInit(): void {
     this.cargarTipDocumentos();
     this.cargarCiudad();
   }
 
-  registrarPersona(){
-    if(this.isPersonaForm){
+  registrarPersona() {
+    if (this.isPersonaForm) {
       const generoSeleccionado = this.personaForm.get('genero')?.value;
       const generoReducido = generoSeleccionado === 'masculino' ? 'M' : generoSeleccionado === 'femenino' ? 'F' : 'O';
 
@@ -74,7 +73,7 @@ export class SignupComponent implements OnInit {
       const cumpleaniosISO = new Date(cumpleaniosSeleccionado).toISOString();
 
       const data = {
-        id: this.id ? this.id: 0,
+        id: this.id ? this.id : 0,
         primerNombre: this.personaForm.get('primerNombre')?.value,
         segundoNombre: this.personaForm.get('segundoNombre')?.value,
         primerApellido: this.personaForm.get('primerApellido')?.value,
@@ -85,25 +84,23 @@ export class SignupComponent implements OnInit {
         cumpleanios: cumpleaniosISO,
         estado: true,
         ciudadId: this.personaForm.get('ciudadId')?.value,
-        fechaCreo:  new Date(),
+        fechaCreo: new Date(),
         fechaModifico: null,
         fechaElimino: null
-
       }
 
       this.service.save(data).subscribe({
-        next: (responde) =>{
-          console.log("Registro de persona exitoso",responde);
+        next: (responde) => {
+          console.log("Registro de persona exitoso", responde);
           this.personaId = responde.id;
           console.log('Persona registrada con ID:', this.personaId);
           this.segundoPaso();
         }
       })
     }
-
   }
 
-  registroUsuario(){
+  registroUsuario() {
     const usuarioData = {
       id: 0,
       nombreUsuario: this.usuarioForm.get('nombreUsuario')?.value,
@@ -118,32 +115,31 @@ export class SignupComponent implements OnInit {
     };
     console.log(usuarioData);
     this.service.saveUser(usuarioData).subscribe({
-      next: (responde) =>{
-        console.log("Registro de usuario exitoso",responde);
-        this.navigatorTo();
+      next: (responde) => {
+        console.log("Registro de usuario exitoso", responde);
+        this.registroRol(responde.id);
       }
-    })
+    });
   }
 
-  navigatorTo(){
+  navigatorTo() {
     this.router.navigate(['login']);
   }
 
-  cargarTipDocumentos(){
+  cargarTipDocumentos() {
     this.serviceTipDocumento.list().subscribe({
-      next: (data:  ITipoDocumento[]) => {
+      next: (data: ITipoDocumento[]) => {
         this.documentoTip = data;
       }
-    })
+    });
   }
 
-  cargarCiudad(){
+  cargarCiudad() {
     this.serviceCiudad.list().subscribe({
-      next:  (data:  ICiudad[]) => {
+      next: (data: ICiudad[]) => {
         this.ciudad = data;
       }
-
-    })
+    });
   }
 
   registrar() {
@@ -154,21 +150,54 @@ export class SignupComponent implements OnInit {
     }
   }
 
-  segundoPaso(){
+  segundoPaso() {
     this.isPersonaForm = false;
   }
 
   onFileChange(event: Event) {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
-      const file = input.files[0]; // Obtiene el archivo seleccionado
+      const file = input.files[0];
       const reader = new FileReader();
 
-      // Lee el archivo como una URL de datos
       reader.readAsDataURL(file);
       reader.onload = () => {
-        this.fotoPerfilBase64 = reader.result as string; // Almacena el resultado en formato Base64
+        this.fotoPerfilBase64 = reader.result as string;
       };
     }
+  }
+
+  registroRol(id: number) {
+    const data = {
+      id: 0,
+      usuarioId: id,
+      rolId: 2,
+      estado: true,
+      fechaCreo: new Date(),
+      fechaModifico: null,
+      fechaElimino: null
+    };
+    this.serviceUsuarioRol.save(data).subscribe(
+      (response: any) => {
+        Swal.fire({
+          icon: 'success',
+          title: '¡Registro Exitoso!',
+          text: 'Se registró su cuenta satisfactoriamente',
+          confirmButtonText: 'Aceptar',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.navigatorTo(); // Redirigir al login
+          }
+        });
+      },
+      error => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Hubo un problema al registrar el rol del usuario',
+          confirmButtonText: 'Aceptar',
+        });
+      }
+    );
   }
 }

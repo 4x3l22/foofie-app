@@ -18,11 +18,15 @@ import { RolVistaComponent } from './pages/rolvista/rolvista.component';
 import { TipoDocumentoComponent } from './pages/tipodocumento/tipodocumento.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { IniciousuarioComponent } from './pages/iniciousuario/iniciousuario.component';
+import { HomeuserComponent } from './pages/iniciousuario/homeuser/homeuser.component';
+import { CargamsvComponent } from './pages/ingredientes/cargamsv/cargamsv.component';
+import { RecetaComponent } from './pages/receta/receta.component';
+import { CargamsvrComponent } from './pages/receta/cargamsvr/cargamsvr.component';
 
 export const routes: Routes = [
   {  path: 'login', component: LoginComponent },
   {  path: 'landing', component:  LandingComponent },
-  {  path: 'singup', component: SignupComponent},
+  {  path: 'signup', component: SignupComponent},
   {   path: '', redirectTo: 'landing', pathMatch: 'full' },
   {
     path: 'star',
@@ -41,14 +45,25 @@ export const routes: Routes = [
       { path: 'rol', component:  RolComponent},
       { path: 'vista', component:  VistaComponent },
       { path: 'rolvista', component: RolVistaComponent},
-      { path: 'tipodocumento', component: TipoDocumentoComponent}
-
+      { path: 'tipodocumento', component: TipoDocumentoComponent},
+      { path: 'cargamsv', component: CargamsvComponent},
+      { path: 'receta', component:  RecetaComponent},
+      { path: 'cargamasivar', component: CargamsvrComponent}
     ]
   },
   {
     path: 'iniouser',
     component: IniciousuarioComponent,
-    canActivate: [authGuard]
+    canActivate: [authGuard],
+    children: [
+      {
+        path: '**', redirectTo: 'homeuser'
+      },
+      {
+        path: '', redirectTo: 'homeuser', pathMatch: 'full'
+      },
+      { path: 'homeuser', component: HomeuserComponent},
+    ]
   },
   { path: '**', redirectTo: 'login' }
 ];

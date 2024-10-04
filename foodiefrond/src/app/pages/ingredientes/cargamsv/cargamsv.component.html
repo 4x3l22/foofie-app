@@ -1,0 +1,61 @@
+<div class="container mt-5">
+  <button class="btn btn-secondary atras" (click)="navigateTo('star/ingredientes')">Atras</button>
+  <h1 class="text-center mb-4">Carga Masiva</h1>
+
+  <!-- Formulario de carga de archivo -->
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="mb-3">
+        <label for="formFile" class="form-label">Seleccione el archivo Excel:</label>
+        <input class="form-control" type="file" (change)="onFileChange($event)" accept=".xlsx, .xls">
+      </div>
+      <div class="d-grid gap-2">
+        <button class="btn btn-primary" (click)="onSubmit()">Cargar y enviar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Switch para alternar entre tabla y JSON -->
+  <div class="form-check form-switch mt-4 text-center">
+    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" (change)="toggleView()">
+    <label class="form-check-label" for="flexSwitchCheckDefault">
+      {{ mostrarComoTabla ? 'Mostrar como JSON' : 'Mostrar como Tabla' }}
+    </label>
+  </div>
+
+  <!-- Tabla de visualización de datos -->
+  <div class="row mt-5" *ngIf="ingredientes.length">
+    <div class="col-md-12">
+      <h3>Datos del Excel:</h3>
+
+      <!-- Mostrar como tabla -->
+      <table class="table table-striped" *ngIf="mostrarComoTabla">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Estado</th>
+            <th>Fecha Creación</th>
+            <th>Fecha Modificación</th>
+            <th>Fecha Eliminación</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let ingrediente of ingredientes">
+            <td>{{ ingrediente.id }}</td>
+            <td>{{ ingrediente.nombre }}</td>
+            <td>{{ ingrediente.descripcion }}</td>
+            <td>{{ ingrediente.estado }}</td>
+            <td>{{ ingrediente.fechaCreo | date:'short' }}</td>
+            <td>{{ ingrediente.fechaModifico }}</td>
+            <td>{{ ingrediente.fechaElimino }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Mostrar como JSON -->
+      <pre *ngIf="!mostrarComoTabla">{{ ingredientes | json }}</pre>
+    </div>
+  </div>
+</div>

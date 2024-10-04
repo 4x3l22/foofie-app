@@ -1,0 +1,19 @@
+.container {
+  max-width: 900px;
+}
+
+.table {
+  margin-top: 20px;
+}
+h1{
+  width: 70rem;
+}
+button{
+  width: 100%;
+}
+.center{
+  justify-content: center;
+}
+.atras{
+  width: 20%;
+}

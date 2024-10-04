@@ -1,0 +1,29 @@
+<nav class="navbar navbar-expand-lg navbar-custom">
+  <div class="container-fluid d-flex justify-content-between align-items-center">
+    <!-- Imagen del logo a la izquierda -->
+    <div  class="imagenlogo">
+      <img id="profile-img-container" [src]="fotoPerfilUrl" width="100%" height="100%" alt="Logo">
+    </div>
+
+    <!-- Botón de colapso (para dispositivos móviles) -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Elementos de navegación centrados -->
+    <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+      <ul class="navbar-nav mb-2 mb-lg-0" *ngFor="let menuItem of menuItems">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">
+            <span [innerHTML]="menuItem.vistaIconos"></span> {{menuItem.nombreVista}}
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Botón de login a la derecha -->
+    <div class="d-flex ms-auto">
+      <button class="btn btn-success" (click)="salir()">Salir</button>
+    </div>
+  </div>
+</nav>
