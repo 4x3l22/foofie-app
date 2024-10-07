@@ -8,7 +8,7 @@ import { IReceta } from '../interface/IReceta';
 })
 export class RecetaService {
 
-  private url = 'http://localhost:9191/api/ControllerReceta';
+  private url = 'http://localhost:9191/api/Receta';
   private msv = '/cargar-masiva';
 
   constructor(private http: HttpClient) { }

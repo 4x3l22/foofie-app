@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class IngredientesService {
 
-  private url = 'http://localhost:9191/api/ControllerIngredientes';
+  private url = 'http://localhost:9191/api/Ingredientes';
   private msv = '/cargar-masiva';
 
   constructor(private http :  HttpClient) { }

@@ -8,7 +8,7 @@ import { IModulo } from '../interface/IModulo';
 })
 export class ModuloService {
 
-  private url = 'http://localhost:9191/api/ControllerModulo';
+  private url = 'http://localhost:9191/api/Modulo';
 
   constructor(private http :  HttpClient) { }
 

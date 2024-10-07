@@ -1,5 +1,5 @@
 <div class="container mt-5">
-  <button class="btn btn-secondary atras" (click)="navigateTo('star/receta')">Atras</button>
+  <button class="btn btn-secondary atras" (click)="navigateTo('star/recetaingrediente')">Atras</button>
   <h1 class="text-center mb-4">Carga Masiva</h1>
 
   <!-- Formulario de carga de archivo -->
@@ -24,7 +24,7 @@
   </div>
 
   <!-- Tabla de visualización de datos -->
-  <div class="row mt-5" *ngIf="recetas.length">
+  <div class="row mt-5" *ngIf="recetasingrediente.length">
     <div class="col-md-12">
       <h3>Datos del Excel:</h3>
 
@@ -33,13 +33,8 @@
         <thead>
           <tr>
             <th>ID</th>
-            <th>Nombre</th>
-            <th>Descripción</th>
-            <th>tiempos</th>
-            <th>Imagen receta</th>
-            <th>Pasos</th>
-            <th>Calificación</th>
-            <th>TipococinaId</th>
+            <th>ingredienteId</th>
+            <th>recetaId</th>
             <th>Estado</th>
             <th>Fecha Creación</th>
             <th>Fecha Modificación</th>
@@ -47,25 +42,20 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let ingrediente of recetas">
-            <td>{{ ingrediente.id }}</td>
-            <td>{{ ingrediente.nombre }}</td>
-            <td>{{ ingrediente.descripcion }}</td>
-            <td>{{ ingrediente.tiempos }}</td>
-            <td>{{ ingrediente.imaganesReceta }}</td>
-            <td>{{ ingrediente.pasos }}</td>
-            <td>{{ ingrediente.calificacion }}</td>
-            <td>{{ ingrediente.tipoCocinaId }}</td>
-            <td>{{ ingrediente.estado }}</td>
-            <td>{{ ingrediente.fechaCreo | date:'short' }}</td>
-            <td>{{ ingrediente.fechaModifico }}</td>
-            <td>{{ ingrediente.fechaElimino }}</td>
+          <tr *ngFor="let items of recetasingrediente">
+            <td>{{ items.id }}</td>
+            <td>{{ items.ingredienteId }}</td>
+            <td>{{ items.recetaId }}</td>
+            <td>{{ items.estado }}</td>
+            <td>{{ items.fechaCreo | date:'short' }}</td>
+            <td>{{ items.fechaModifico }}</td>
+            <td>{{ items.fechaElimino }}</td>
           </tr>
         </tbody>
       </table>
 
       <!-- Mostrar como JSON -->
-      <pre *ngIf="!mostrarComoTabla">{{ recetas | json }}</pre>
+      <pre *ngIf="!mostrarComoTabla">{{ recetasingrediente | json }}</pre>
     </div>
   </div>
 </div>

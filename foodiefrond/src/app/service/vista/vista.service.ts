@@ -8,7 +8,7 @@ import { IVista } from '../interface/IVista';
 })
 export class VistaService {
 
-  private url = 'http://localhost:9191/api/ControllerVista';
+  private url = 'http://localhost:9191/api/Vista';
 
   constructor(private http :  HttpClient) { }
 

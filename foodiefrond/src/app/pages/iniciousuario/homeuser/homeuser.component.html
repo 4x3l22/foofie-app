@@ -1,1 +1,52 @@
-<p>homeuser works!</p>
+<div class="container">
+  <h2>Ingresa Tus ingredientes</h2>
+  <!-- <div class="barra">
+    <input type="text" class="form-control mi-input" id="ingrediente1" placeholder="Ingrediente">
+  </div> -->
+  @if (desable == false) {
+    <div class="text-warning">
+      {{message}}
+    </div>
+
+  }
+</div>
+<div class="container">
+  <mat-form-field>
+    <mat-label>Ingredientes</mat-label>
+    <mat-select [formControl]="toppings" multiple>
+      <mat-select-trigger>
+        {{ obtenerNombresIngredientes(toppings.value) }}
+      </mat-select-trigger>
+      <mat-option *ngFor="let ingrediente of ingredientes" [value]="ingrediente.id">
+        {{ ingrediente.nombre }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<div class="container">
+  <section class="contenido">
+    <article *ngFor="let  receta of ListaRecetas">
+
+      <div class="card mb-3" style="max-width: 540px; height: 220px;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img [src]="receta.imaganesReceta" class="img-fluid rounded-start h" width="100%">
+
+          </div>
+          <div class="col-md-8">
+            <div class="card-body" style="height: 220px;">
+              <h5 class="card-title">{{receta.nombre}}</h5>
+              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <div class="footer">
+                <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+                <button class="bt btn-warning" (click)="navigateTo('iniouser/receta', receta.id)">Preparar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </article>
+  </section>
+</div>

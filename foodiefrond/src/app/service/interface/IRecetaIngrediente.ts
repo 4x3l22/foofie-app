@@ -3,7 +3,7 @@ export interface IRecetaIngrediente {
   recetaId: number;
   ingredienteId: number;
   estado: boolean;
-  fechaCreo: string;
-  fechaModifico: string | null;
-  fechaElimino: string | null;
+  fechaCreo: Date;
+  fechaModifico: Date | null;
+  fechaElimino: Date | null;
 }

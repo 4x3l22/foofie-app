@@ -46,8 +46,6 @@ export class MenuusuarioComponent implements OnInit {
       usuarioObservable.subscribe(
         (data: IUsuarioi) => {  // Ajustar para recibir un objeto en lugar de un array
           this.usuario = data;
-          console.log("Datos Usuario: ", this.usuario);
-
           // Almacenar en sessionStorage
           this.storeUserInSession(this.usuario);
 
@@ -67,21 +65,26 @@ export class MenuusuarioComponent implements OnInit {
 
   // Función para convertir Base64 a Blob y obtener la URL
   convertirBase64AUrl(base64: string): string {
-    // Decodificar el Base64
-    const byteCharacters = atob(base64);
-    const byteNumbers = new Array(byteCharacters.length);
+    // Limpiar la cadena base64
+    base64 = base64.trim();
 
-    for (let i = 0; i < byteCharacters.length; i++) {
-      byteNumbers[i] = byteCharacters.charCodeAt(i);
+    // Asegurarse de que la longitud sea un múltiplo de 4
+    while (base64.length % 4 !== 0) {
+        base64 += '=';
     }
 
-    const byteArray = new Uint8Array(byteNumbers);
+    // Reemplazar caracteres especiales que podrían estar presentes
+    base64 = base64.replace(/[^A-Za-z0-9+/=]/g, '');
 
-    // Crear un Blob con el tipo MIME apropiado (image/jpeg)
-    const blob = new Blob([byteArray], { type: 'image/jpeg' });
+    // Si la cadena es válida, construir la URL
+    if (base64) {
+        // console.log("debug:  "+'data:image/png;base64,'+base64);
 
-    // Crear y devolver el URL del Blob
-    return URL.createObjectURL(blob);
+        return 'data:image/jpeg;base64,' + base64;
+    } else {
+        console.error('La cadena base64 está vacía o es inválida');
+        return ''; // O algún valor predeterminado
+    }
   }
 
   // Almacena el usuario en sessionStorage
@@ -91,7 +94,6 @@ export class MenuusuarioComponent implements OnInit {
       correo: usuario.correo,
       fotoPerfil: usuario.fotoPerfil
     };
-    console.log("Guardando en sessionStorage: ", usuarioParaGuardar);
     sessionStorage.setItem('usuario', JSON.stringify(usuarioParaGuardar));
   }
 

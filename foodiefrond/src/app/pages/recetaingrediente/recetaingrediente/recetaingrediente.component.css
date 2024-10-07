@@ -1,0 +1,74 @@
+.tabla{
+  width: 25cm;
+}
+.encabezado{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 20px 0 60px 0px;
+}
+.dp{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+ng-select {
+  background-color: white; /* Fondo blanco para evitar transparencia */
+  border: 1px solid #ced4da; /* Borde del campo select */
+  border-radius: 4px; /* Bordes redondeados */
+  padding: 8px; /* Espaciado interno */
+  width: 100%; /* Ajustar al ancho del contenedor */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para dar profundidad */
+}
+
+ng-select .ng-select-container {
+  background-color: white; /* Fondo blanco en el contenedor */
+  color: #495057; /* Color del texto */
+}
+
+ng-select .ng-select-dropdown {
+  background-color: white; /* Fondo del menú desplegable */
+  border: 1px solid #ced4da; /* Borde del menú desplegable */
+}
+
+ng-select .ng-select-item {
+  padding: 8px 12px; /* Espaciado entre los elementos */
+  color: #495057; /* Color del texto de los elementos */
+}
+
+ng-select .ng-select-item:hover {
+  background-color: #f8f9fa; /* Fondo de los elementos al pasar el mouse */
+}
+
+ng-select .ng-select-selected-item {
+  background-color: #e9ecef; /* Fondo del elemento seleccionado */
+}
+
+.ng-select.disabled {
+  background-color: #e9ecef; /* Fondo para select deshabilitado */
+  color: #6c757d; /* Color del texto para select deshabilitado */
+}
+ng-select {
+  /* Estilos generales para el ng-select */
+  width: 100%; /* Ajustar al ancho del contenedor */
+}
+
+ng-select .ng-select-dropdown {
+  background-color: white; /* Fondo blanco para el dropdown */
+  border: 1px solid #ced4da; /* Borde del dropdown */
+  border-radius: 4px; /* Bordes redondeados */
+  z-index: 1000; /* Asegúrate de que el dropdown esté por encima de otros elementos */
+}
+
+ng-select .ng-select-item {
+  color: #495057; /* Color del texto de los elementos */
+}
+
+ng-select .ng-select-item:hover {
+  background-color: #f8f9fa; /* Fondo de los elementos al pasar el mouse */
+}
+
+ng-select .ng-select-selected-item {
+  background-color: #e9ecef; /* Fondo del elemento seleccionado */
+}

@@ -9,8 +9,8 @@ import { IUsuarioi } from '../interface/IUsuario';
 })
 export class SignupService {
 
-  private url = 'http://localhost:9191/api/ControllerPersona';
-  private urlUser = 'http://localhost:9191/api/ControllerUsuario';
+  private url = 'http://localhost:9191/api/Persona';
+  private urlUser = 'http://localhost:9191/api/Usuario';
 
   constructor(private http :  HttpClient) { }
 

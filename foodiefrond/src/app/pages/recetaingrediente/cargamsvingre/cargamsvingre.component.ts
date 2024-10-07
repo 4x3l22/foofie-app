@@ -1,25 +1,24 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { IRecetaIngrediente } from '../../../service/interface/IRecetaIngrediente';
 import { Router } from '@angular/router';
-import { RecetaService } from '../../../service/receta/receta.service';
-import { IReceta } from '../../../service/interface/IReceta';
+import { RecetaingredienteService } from '../../../service/recetaingrediente/recetaingrediente.service';
 import * as XLSX from  'xlsx';
 import Swal from 'sweetalert2';
-import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-cargamsvr',
+  selector: 'app-cargamsvingre',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './cargamsvr.component.html',
-  styleUrl: './cargamsvr.component.css'
+  templateUrl: './cargamsvingre.component.html',
+  styleUrl: './cargamsvingre.component.css'
 })
-export class CargamsvrComponent {
-
-  recetas: IReceta[] = [];
+export class CargamsvingreComponent {
+  recetasingrediente: IRecetaIngrediente[] = [];
   datosExcel: any[] = [];
   mostrarComoTabla: boolean = true;
 
-  constructor(private router: Router, private  servicio: RecetaService) { }
+  constructor(private router: Router, private  servicio: RecetaingredienteService) { }
 
   navigateTo(ruta: string){
     this.router.navigate([ruta]);
@@ -42,41 +41,36 @@ export class CargamsvrComponent {
 
       const datosExcel = XLSX.utils.sheet_to_json(ws, { header: 1 })as any[][];
 
-      this.recetas = datosExcel.slice(1).map((row: any[]) => {
-        const [id, nombre, descripcion, tiempos, imagenreceta, pasos, tipococina] = row;
-        const cambio = (tiempos || '').replace(/['"]+/g, '');
+      this.recetasingrediente = datosExcel.slice(1).map((row: any[]) => {
+        const [recetaId, ingredienteId] = row;
+        // const cambio = (tiempos || '').replace(/['"]+/g, '');
         // const tiempocorrecto = `0${cambio}`;
         return {
-          id: id || '',
-          nombre: nombre || '',
-          descripcion: descripcion || '',
-          tiempos:cambio,
-          imaganesReceta: imagenreceta || '',
-          pasos: pasos || '',
-          calificacion: null,
-          tipoCocinaId: tipococina || '',
+          id: 0,
+          recetaId: recetaId || '',
+          ingredienteId: ingredienteId || '',
           estado: true,
           fechaCreo: new Date(),
           fechaModifico: null,
           fechaElimino: null
-        } as IReceta;
+        } as IRecetaIngrediente;
       });
 
-      console.log(this.recetas);
+      console.log(this.recetasingrediente);
     };
 
     reader.readAsBinaryString(target.files[0]);
   }
 
   onSubmit() {
-    console.log('Datos a enviar:', this.recetas);
-    this.servicio.saveMSV(this.recetas).subscribe(
+    console.log('Datos a enviar:', this.recetasingrediente);
+    this.servicio.saveMSV(this.recetasingrediente).subscribe(
       (response: any) => {
         // Si la petición es exitosa, mostrar alerta de éxito
         Swal.fire({
           icon: 'success',
           title: '¡Éxito!',
-          text: 'Los ingredientes fueron cargados correctamente.',
+          text: 'Las relaciones fueron cargadas correctamente.',
           confirmButtonText: 'OK'
         });
       },
@@ -85,7 +79,7 @@ export class CargamsvrComponent {
         Swal.fire({
           icon: 'error',
           title: 'Error',
-          text: 'Ocurrió un error al cargar los ingredientes.',
+          text: 'Ocurrió un error al cargar los conectores de ingredientes y recetas.',
           confirmButtonText: 'Intentar de nuevo'
         });
         console.error('Error al cargar ingredientes', error);

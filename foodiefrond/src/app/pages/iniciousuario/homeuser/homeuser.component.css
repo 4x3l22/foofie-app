@@ -1,0 +1,29 @@
+h2{
+  text-align: center;
+  margin-top: 20px;
+}
+.mi-input{
+  border: 1px solid;
+}
+.example-additional-selection {
+  opacity: 0.75;
+  font-size: 0.75em;
+  line-height: 1;
+}
+mat-form-field{
+  width: 500px;
+  display: contents;
+}
+.contenido{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+.h{
+  height: 100% !important;
+}
+.footer{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}

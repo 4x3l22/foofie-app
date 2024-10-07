@@ -8,7 +8,7 @@ import { IRolVista } from '../interface/IRolVista';
 })
 export class RolvistaService {
 
-  private url = 'http://localhost:9191/api/ControllerRolVista';
+  private url = 'http://localhost:9191/api/RolVista';
 
   constructor(private http :  HttpClient) { }
 

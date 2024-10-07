@@ -1,6 +1,7 @@
 export interface IReceta {
   id: number;
   nombre: string;
+  descripcion: string;
   tiempos: string;
   imaganesReceta: string | undefined;
   pasos: string;

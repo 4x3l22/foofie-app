@@ -22,6 +22,9 @@ import { HomeuserComponent } from './pages/iniciousuario/homeuser/homeuser.compo
 import { CargamsvComponent } from './pages/ingredientes/cargamsv/cargamsv.component';
 import { RecetaComponent } from './pages/receta/receta.component';
 import { CargamsvrComponent } from './pages/receta/cargamsvr/cargamsvr.component';
+import { RecetaingredienteComponent } from './pages/recetaingrediente/recetaingrediente/recetaingrediente.component';
+import { RecetauserComponent } from './pages/iniciousuario/recetauser/recetauser.component';
+import { CargamsvingreComponent } from './pages/recetaingrediente/cargamsvingre/cargamsvingre.component';
 
 export const routes: Routes = [
   {  path: 'login', component: LoginComponent },
@@ -48,7 +51,11 @@ export const routes: Routes = [
       { path: 'tipodocumento', component: TipoDocumentoComponent},
       { path: 'cargamsv', component: CargamsvComponent},
       { path: 'receta', component:  RecetaComponent},
-      { path: 'cargamasivar', component: CargamsvrComponent}
+      { path: 'cargamasivar', component: CargamsvrComponent},
+      { path: 'recetaingrediente', component:  RecetaingredienteComponent },
+      { path: 'cargamsvri', component:  CargamsvingreComponent }
+
+
     ]
   },
   {
@@ -56,13 +63,10 @@ export const routes: Routes = [
     component: IniciousuarioComponent,
     canActivate: [authGuard],
     children: [
-      {
-        path: '**', redirectTo: 'homeuser'
-      },
-      {
-        path: '', redirectTo: 'homeuser', pathMatch: 'full'
-      },
+      { path: '**', redirectTo: 'homeuser' },
+      { path: '', redirectTo: 'homeuser', pathMatch: 'full' },
       { path: 'homeuser', component: HomeuserComponent},
+      { path: 'receta', component: RecetauserComponent}
     ]
   },
   { path: '**', redirectTo: 'login' }

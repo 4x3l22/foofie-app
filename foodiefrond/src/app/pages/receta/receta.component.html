@@ -49,6 +49,13 @@
             </div>
           </div>
           <div class="mb-3">
+            <label for="descripcion" class="form-label">Descripción</label>
+            <input type="text" formControlName="descripcion" class="form-control" placeholder="descripción">
+            <div *ngIf="recetaForm.get('descripcion')?.invalid && recetaForm.get('descripcion')?.touched" class="text-danger">
+              La descripción es obligatorio
+            </div>
+          </div>
+          <div class="mb-3">
             <label for="tiempos" class="form-label">Tiempos</label>
             <input type="time" formControlName="tiempos" class="form-control" placeholder="Tiempos">
             <div *ngIf="recetaForm.get('tiempos')?.invalid && recetaForm.get('tiempos')?.touched" class="text-danger">

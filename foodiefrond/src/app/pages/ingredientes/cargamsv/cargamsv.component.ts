@@ -43,9 +43,9 @@ export class CargamsvComponent {
       const datosExcel = XLSX.utils.sheet_to_json(ws, { header: 1 })as any[][];
 
       this.ingredientes = datosExcel.slice(1).map((row: any[]) => {
-        const [nombre, descripcion] = row;
+        const [id, nombre, descripcion] = row;
         return {
-          id: 0,
+          id: id || '',
           nombre: nombre || '',
           descripcion: descripcion || '',
           estado: true,

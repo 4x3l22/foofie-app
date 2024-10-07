@@ -8,12 +8,13 @@ import { Observable } from 'rxjs';
 })
 export class RecetaingredienteService {
 
-  private apiUrl = 'http://localhost:9191/api/ControllerRecetaIngrediente';
+  private apiUrl = 'http://localhost:9191/api/RecetaIngrediente';
+  private msv = '/CargarMasiva';
 
   constructor(private http: HttpClient) {}
 
   list(): Observable<IRecetaIngrediente[]> {
-    return this.http.get<IRecetaIngrediente[]>(`${this.apiUrl}`);
+    return this.http.get<IRecetaIngrediente[]>(`${this.apiUrl}/select`);
   }
 
   getById(id: number): Observable<IRecetaIngrediente> {
@@ -21,7 +22,13 @@ export class RecetaingredienteService {
   }
 
   save(recetaIngrediente: IRecetaIngrediente): Observable<IRecetaIngrediente> {
-    return this.http.post<IRecetaIngrediente>(this.apiUrl, recetaIngrediente);
+    const headers = { 'Content-Type': 'application/json' };
+    return this.http.post<IRecetaIngrediente>(this.apiUrl, recetaIngrediente,  { headers:  headers });
+  }
+
+  saveMSV(ingredientes: IRecetaIngrediente[]):  Observable<IRecetaIngrediente[]>{
+    const headers = {'Content-Type': 'application/json'};
+    return this.http.post<IRecetaIngrediente[]>(this.apiUrl+this.msv,  ingredientes, {headers: headers});
   }
 
   update(recetaIngrediente: IRecetaIngrediente): Observable<IRecetaIngrediente> {

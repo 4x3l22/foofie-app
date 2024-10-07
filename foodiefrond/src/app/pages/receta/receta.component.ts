@@ -34,6 +34,7 @@ export class RecetaComponent implements OnInit {
   ) {
     this.recetaForm = new FormGroup({
       nombre: new FormControl(null, [Validators.required]),
+      descripcion: new FormControl(null,  [Validators.required]),
       tiempos: new FormControl(null, [Validators.required]),
       imagenesReceta: new FormControl(null, [Validators.required]),
       pasos: new FormControl(null, [Validators.required]),
@@ -84,6 +85,7 @@ export class RecetaComponent implements OnInit {
       const nuevaReceta: IReceta = {
         id: this.id ? this.id : 0,
         nombre: this.recetaForm.value.nombre,
+        descripcion: this.recetaForm.value.descripcion,
         tiempos: tiempoCompleto,
         imaganesReceta: this.recetaForm.value.imagenesReceta,
         pasos: this.recetaForm.value.pasos,
@@ -151,19 +153,39 @@ export class RecetaComponent implements OnInit {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       const file = input.files[0];
+
+      // Verificar el tipo de archivo
+      if (!file.type.match('image.*')) {
+        console.error('El archivo no es una imagen.');
+        return;
+      }
+
       const reader = new FileReader();
 
-      reader.readAsDataURL(file);
+      // Manejar posibles errores al leer el archivo
+      reader.onerror = (error) => {
+        console.error('Error al leer el archivo:', error);
+      };
+
       reader.onload = () => {
-        this.fotoPerfilBase64 = reader.result as string;
+        const base64String = reader.result as string;
+        // Validar si la imagen es muy grande
+        if (base64String.length > 5000000) { // Si es mayor a 5MB
+          console.error('La imagen es demasiado grande para codificarla en Base64.');
+          return;
+        }
+
+        this.fotoPerfilBase64 = base64String;
         // Asignar el valor al control del formulario
         this.recetaForm.patchValue({
-          imagenesReceta: this.fotoPerfilBase64 // Asigna aquí
+          imagenesReceta: this.fotoPerfilBase64
         });
       };
+
+      // Leer el archivo como una URL Base64
+      reader.readAsDataURL(file);
     }
   }
-
 
 
   resetForm() {

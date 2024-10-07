@@ -69,7 +69,7 @@ export class IngredientesComponent implements OnInit {
       descripcion: this.ingredientForm.value.descripcion,
       estado: true,
       fechaCreo: this.id ? this.ingredientes.find(ing => ing.id === this.id)?.fechaCreo : new Date(),
-      fechaModifico: new Date(),
+      fechaModifico: this.id ? new Date() : null,
       fechaElimino: null
     };
 

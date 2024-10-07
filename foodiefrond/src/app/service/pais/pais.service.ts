@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class PaisService {
 
-  private url = 'http://localhost:9191/api/ControllerPais';
+  private url = 'http://localhost:9191/api/Pais';
 
   constructor(private http :  HttpClient) { }
 

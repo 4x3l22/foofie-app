@@ -9,7 +9,7 @@ import { tap } from 'rxjs/operators';
 })
 export class UsuarioService {
 
-  private url = 'http://localhost:9191/api/ControllerUsuario';
+  private url = 'http://localhost:9191/api/Usuario';
 
   constructor(private http: HttpClient) {}
 

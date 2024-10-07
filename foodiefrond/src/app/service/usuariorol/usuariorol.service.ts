@@ -9,7 +9,7 @@ import { IUsuarioRol } from '../interface/IUsuarioRol';
 export class UsuariorolService {
 
 
-  private url = 'http://localhost:9191/api/ControllerUsuarioRol';
+  private url = 'http://localhost:9191/api/UsuarioRol';
 
   constructor(private http: HttpClient) {}
 

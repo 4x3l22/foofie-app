@@ -8,7 +8,7 @@ import { ITipoCocina } from '../interface/ITipoCocina';
 })
 export class TipococinaService {
 
-  private url = 'http://localhost:9191/api/ControllerTipoCocina';
+  private url = 'http://localhost:9191/api/TipoCocina';
 
   constructor(private http :  HttpClient) { }
 
