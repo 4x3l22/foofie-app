@@ -1,1 +1,71 @@
-<p>recetauser works!</p>
+<div class="container mt-4">
+  <div class="row">
+    <!-- Icono de corazón y flecha de atrás -->
+    <div class="col-12 d-flex justify-content-between align-items-center mb-3">
+      <a (click)="navigateTo('iniouser/homeuser')" class="btn btn-outline-primary" id="backBtn">
+        <i class="bi bi-arrow-left"></i> Volver
+      </a>
+      <button class="btn btn-outline-danger" id="saveRecipeBtn">
+        <i class="bi bi-heart"></i>
+      </button>
+    </div>
+
+    <!-- Sección de la imagen y contenido -->
+    <div class="col-md-4">
+      <img [src]="receta?.imaganesReceta" alt="Imagen de la receta" class="img-fluid rounded">
+    </div>
+
+    <div class="col-md-8">
+      <h1 class="font-weight-bold display-4" id="recipeTitle">{{receta?.nombre}}</h1>
+      <p class="lead" id="recipeDescription">{{receta?.descripcion}}</p>
+    </div>
+  </div>
+
+  <!-- Sección de pasos -->
+  <div class="row mt-4">
+    <div class="col-12">
+      <h3 class="font-weight-bold">Pasos para preparar la receta</h3>
+      <ol id="recipeSteps">
+        <li>{{receta?.pasos}}</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- Sección de publicación de resultados -->
+  <div class="row mt-5">
+    <div class="col-md-12">
+      <h3>Publicar Resultados</h3>
+      <p>¿Has preparado esta receta? ¡Comparte tu resultado con nosotros!</p>
+
+      <form [formGroup]="recetaForm" (ngSubmit)="save(receta?.id!)">
+
+        <!-- Campo para el título de la publicación -->
+        <div class="form-group">
+          <label for="titulo">Título de tu publicación</label>
+          <input type="text" formControlName="titulo" class="form-control" placeholder="Introduce un título atractivo">
+        </div>
+
+        <!-- Vista previa de la imagen -->
+        <div class="form-group mt-4">
+          <label for="foto">Sube una foto de tu resultado</label>
+          <input type="file" class="form-control" (change)="onFileSelected($event)">
+        </div>
+
+        <!-- Imagen previa -->
+        <div *ngIf="compressedImageBase64" class="form-group mt-3 text-center">
+          <h5>Vista previa de la imagen:</h5>
+          <img [src]="compressedImageBase64" alt="Vista previa" class="img-fluid rounded" style="max-width: 300px; height: auto; border: 1px solid #ddd; padding: 5px;">
+        </div>
+
+        <!-- Campo para comentarios adicionales -->
+        <div class="form-group mt-3">
+          <label for="descripcion">Comentarios adicionales</label>
+          <textarea formControlName="descripcion" class="form-control" rows="3" placeholder="Cuéntanos tu experiencia al preparar esta receta..."></textarea>
+        </div>
+
+        <!-- Botón para publicar -->
+        <button type="submit" class="btn btn-success mt-3 mb-3">Publicar Resultado</button>
+      </form>
+    </div>
+  </div>
+</div>

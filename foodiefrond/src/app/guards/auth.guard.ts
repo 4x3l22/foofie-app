@@ -6,33 +6,37 @@ export const authGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
   const service = inject(LoginService);
 
-  const user = service.getUser(); // Obtener el usuario del localStorage
-  const isLoggedIn = user !== null;
-  const rolId = user ? user.loginDao.rolId : null; // Ajusta esto para acceder a rolId correctamente
+  const isBrowser = typeof window !== 'undefined' && typeof localStorage !== 'undefined';  // Verifica si está en el navegador
 
-  setInterval(()=>{
-    var  token = localStorage.getItem('user');
-    if(token == null){
+  if (isBrowser) {
+    const user = service.getUser();
+    const isLoggedIn = user !== null;
+    const rolId = user ? user.loginDao.rolId : null;
+
+    setInterval(() => {
+      const token = localStorage.getItem('user');
+      if (!token) {
+        router.navigate(['/login']);
+      }
+    }, 100);
+
+    if (!isLoggedIn) {
+      console.log('Redirigiendo a login...');
       router.navigate(['/login']);
+      return false;
     }
 
-  },100)
-
-  // Redirigir si el usuario no está autenticado
-  if (!isLoggedIn) {
-    console.log('Redirigiendo a login...');
-    router.navigate(['/login']);
-    return false;
-  }
-
-  // Validación de roles
-  if (route.routeConfig?.path === 'star' && rolId === 1) {
-    return true; // Admin puede acceder a 'star'
-  } else if (route.routeConfig?.path === 'iniouser' && rolId === 2) {
-    return true; // Usuario puede acceder a 'iniouser'
+    if (route.routeConfig?.path === 'star' && rolId === 1) {
+      return true;
+    } else if (route.routeConfig?.path === 'iniouser' && rolId === 2) {
+      return true;
+    } else {
+      console.log('Acceso denegado. Redirigiendo...');
+      router.navigate(['/login']);
+      return false;
+    }
   } else {
-    console.log('Acceso denegado. Redirigiendo...');
-    router.navigate(['/login']);
+    console.log('El entorno no es el navegador.');
     return false;
   }
 };

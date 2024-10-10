@@ -43,7 +43,7 @@ export class CargamsvrComponent {
       const datosExcel = XLSX.utils.sheet_to_json(ws, { header: 1 })as any[][];
 
       this.recetas = datosExcel.slice(1).map((row: any[]) => {
-        const [id, nombre, descripcion, tiempos, imagenreceta, pasos, tipococina] = row;
+        const [id, nombre, descripcion, tiempos, pasos, imagenreceta, tipococina] = row;
         const cambio = (tiempos || '').replace(/['"]+/g, '');
         // const tiempocorrecto = `0${cambio}`;
         return {

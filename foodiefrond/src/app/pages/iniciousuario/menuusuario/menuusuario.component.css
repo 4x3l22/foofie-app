@@ -51,9 +51,10 @@
   background-color: #FF3D00;
 }
 .imagenlogo{
-  height: 108px;
-  width: 120px;
+  height: 100px;
+  width: 100px;
   overflow: hidden;
+  border-radius: 50%;
 }
 .optybtton{
   margin-left: 30%;

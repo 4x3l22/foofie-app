@@ -63,11 +63,12 @@ export const routes: Routes = [
     component: IniciousuarioComponent,
     canActivate: [authGuard],
     children: [
-      { path: '**', redirectTo: 'homeuser' },
       { path: '', redirectTo: 'homeuser', pathMatch: 'full' },
-      { path: 'homeuser', component: HomeuserComponent},
-      { path: 'receta', component: RecetauserComponent}
+      { path: 'homeuser', component: HomeuserComponent },
+      { path: 'recetauser', component: RecetauserComponent },
+      { path: '**', redirectTo: 'homeuser' }
     ]
   },
+
   { path: '**', redirectTo: 'login' }
 ];

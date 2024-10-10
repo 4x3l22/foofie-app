@@ -12,7 +12,6 @@ import { Config } from 'datatables.net';
 import { Subject } from 'rxjs';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { Router } from '@angular/router';
-declare var $: any;
 
 @Component({
   selector: 'app-recetaingrediente',
@@ -53,11 +52,6 @@ export class RecetaingredienteComponent implements OnInit {
       pagingType: 'full_numbers',
       pageLength: 5
     };
-    setTimeout(() => {
-      $(function(){
-        $('.selectpicker').selectpicker();
-      })
-    }, 0);
   }
 
   navigateTo(ruta:string){
