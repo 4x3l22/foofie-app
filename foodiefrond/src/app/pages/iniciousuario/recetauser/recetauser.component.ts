@@ -1,3 +1,4 @@
+import { RecetarioService } from './../../../service/recetario/recetario.service';
 import { IPublicacion } from './../../../service/interface/IPublicacion';
 import { state } from '@angular/animations';
 import { CommonModule } from '@angular/common';
@@ -7,6 +8,8 @@ import { IListaRecetas } from '../../../service/interface/IListaRecetas';
 import { PublicacionService } from '../../../service/publicacion/publicacion.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { IRecetario } from '../../../service/interface/IRecetario';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-recetauser',
@@ -26,9 +29,14 @@ export class RecetauserComponent implements OnInit{
   compressedImageBase64: string | ArrayBuffer | null = null;
   user?: string;
   userId?: number;
+  isFavorite: boolean = false;
 
-  constructor(private service: PublicacionService, private router: Router){
-
+  constructor(
+    private service: PublicacionService,
+    private router: Router,
+    private serviceRecetario: RecetarioService,
+    private toastr: ToastrService
+  ){
     this.recetaForm = new FormGroup({
       titulo: new FormControl(null, [Validators.required]),
       descripcion: new FormControl(null, [Validators.required]),
@@ -140,5 +148,28 @@ export class RecetauserComponent implements OnInit{
 
   navigateTo(ruta: string){
     this.router.navigate([ruta]);
+  }
+
+  guardarRecetario(recetaId: number){
+
+    const data: IRecetario = {
+      id: 0,
+      usuarioId:  this.userId,
+      recetaId: recetaId,
+      estado: true,
+      fechaCreo: new Date(),
+      fechaModifico: this.id ? new Date() : null,
+      fechaElimino:  null,
+    }
+
+    this.serviceRecetario.save(data).subscribe({
+      next:  (data) => {
+        this.toastr.success('Guadado en recetario','Guardado');
+        this.isFavorite = true;
+      },
+      error: (error) =>{
+        this.toastr.error('Error al guardar en recetario','Error');
+      }
+    })
   }
 }

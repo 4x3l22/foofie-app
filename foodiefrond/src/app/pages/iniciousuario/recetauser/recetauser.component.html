@@ -5,7 +5,11 @@
       <a (click)="navigateTo('iniouser/homeuser')" class="btn btn-outline-primary" id="backBtn">
         <i class="bi bi-arrow-left"></i> Volver
       </a>
-      <button class="btn btn-outline-danger" id="saveRecipeBtn">
+      <button
+        class="btn"
+        [ngClass]="isFavorite ? 'btn-danger' : 'btn-outline-danger'"
+        (click)="guardarRecetario(receta?.id!)"
+        id="saveRecipeBtn">
         <i class="bi bi-heart"></i>
       </button>
     </div>

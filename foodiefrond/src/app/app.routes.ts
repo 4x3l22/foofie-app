@@ -25,6 +25,7 @@ import { CargamsvrComponent } from './pages/receta/cargamsvr/cargamsvr.component
 import { RecetaingredienteComponent } from './pages/recetaingrediente/recetaingrediente/recetaingrediente.component';
 import { RecetauserComponent } from './pages/iniciousuario/recetauser/recetauser.component';
 import { CargamsvingreComponent } from './pages/recetaingrediente/cargamsvingre/cargamsvingre.component';
+import { RecetarioComponent } from './pages/iniciousuario/recetario/recetario.component';
 
 export const routes: Routes = [
   {  path: 'login', component: LoginComponent },
@@ -66,6 +67,7 @@ export const routes: Routes = [
       { path: '', redirectTo: 'homeuser', pathMatch: 'full' },
       { path: 'homeuser', component: HomeuserComponent },
       { path: 'recetauser', component: RecetauserComponent },
+      { path: 'recetario', component: RecetarioComponent},
       { path: '**', redirectTo: 'homeuser' }
     ]
   },

@@ -12,10 +12,10 @@
 
     <!-- Elementos de navegación centrados -->
     <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
-      <ul class="navbar-nav mb-2 mb-lg-0" *ngFor="let menuItem of menuItems">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">
-            <span [innerHTML]="menuItem.vistaIconos"></span> {{menuItem.nombreVista}}
+      <ul class="nav nav-underline mb-2 mb-lg-0">
+        <li class="nav-item" *ngFor="let menuItem of menuItems">
+          <a class="nav-link" aria-current="page" (click)="navigationTo(menuItem.nombreVista)">
+            <span [innerHTML]="menuItem.vistaIconos"></span> <b>{{menuItem.nombreVista}}</b>
           </a>
         </li>
       </ul>

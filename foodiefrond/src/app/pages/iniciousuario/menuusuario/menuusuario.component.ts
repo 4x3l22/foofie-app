@@ -35,7 +35,9 @@ export class MenuusuarioComponent implements OnInit {
 
   // Método de navegación
   navigationTo(ruta: string) {
-    this.router.navigate([ruta]);
+    const rutatotal =`iniouser/${ruta}`.toLowerCase();
+    // alert(rutatotal);
+    this.router.navigate([rutatotal]);
   }
 
   // Listar usuario y almacenar en sessionStorage
