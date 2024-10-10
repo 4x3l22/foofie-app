@@ -12,6 +12,10 @@ export class RecetarioService {
 
   constructor(private http:  HttpClient) { }
 
+  load(id: number):  Observable<IRecetario[]> {
+    return this.http.get<IRecetario[]>(`${this.url}/recetario/${id}`);
+  }
+
   save(recetario: IRecetario): Observable<IRecetario>{
     const headers = {  'Content-Type': 'application/json' };
     return this.http.post<IRecetario>(this.url, recetario,  { headers:  headers });

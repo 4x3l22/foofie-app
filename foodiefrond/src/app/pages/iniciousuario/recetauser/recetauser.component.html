@@ -2,9 +2,15 @@
   <div class="row">
     <!-- Icono de corazón y flecha de atrás -->
     <div class="col-12 d-flex justify-content-between align-items-center mb-3">
-      <a (click)="navigateTo('iniouser/homeuser')" class="btn btn-outline-primary" id="backBtn">
-        <i class="bi bi-arrow-left"></i> Volver
-      </a>
+      @if (receta?.estado == true) {
+        <a (click)="navigateTo('iniouser/recetario')" class="btn btn-outline-primary" id="backBtn">
+          <i class="bi bi-arrow-left"></i> Volver
+        </a>
+      }@if(receta?.estado == undefined || receta?.estado == null){
+        <a (click)="navigateTo('iniouser/homeuser')" class="btn btn-outline-primary" id="backBtn">
+          <i class="bi bi-arrow-left"></i> Volver
+        </a>
+      }
       <button
         class="btn"
         [ngClass]="isFavorite ? 'btn-danger' : 'btn-outline-danger'"

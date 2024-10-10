@@ -1,0 +1,103 @@
+.contenido{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin-top: 20px;
+}
+.h{
+  height: 100% !important;
+}
+.footer{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.mb {
+  margin-bottom: 20px;
+}
+
+.card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 600px;
+  height: 330px;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between; /* Separa la imagen del contenido de texto */
+  flex-direction: row; /* Mantén la disposición horizontal */
+  margin-bottom: 30px;
+}
+
+.image-container {
+  flex-shrink: 0;
+  width: 200px; /* Ajusta el ancho de la imagen */
+  height: 20.8rem; /* Para que la imagen cubra la altura del contenedor */
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ajusta la imagen para que cubra completamente el área asignada */
+  border-left: 1px solid #ddd; /* Ajusta el borde si lo prefieres en la izquierda */
+}
+
+.card-details {
+  padding: 20px;
+  flex: 1; /* Ocupa el espacio restante */
+}
+
+.recipe-title {
+  font-size: 24px;
+  margin: 0;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.stars {
+  color: #f39c12; /* Color para las estrellas */
+}
+
+.rating-score {
+  margin-left: 8px;
+  font-weight: bold;
+}
+
+.description {
+  font-size: 14px;
+  color: #555;
+  width: 100%;
+  overflow: scroll;
+  scrollbar-width: none;
+  height: 36%;
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+  margin: 15px 0;
+  font-size: 14px;
+  color: #777;
+}
+
+.new-recipes {
+  margin-top: 20px;
+}
+
+.thumbnails {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.thumbnails img {
+  width: 60px;
+  height: auto;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

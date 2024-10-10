@@ -16,6 +16,7 @@ export class MenuusuarioComponent implements OnInit {
   usuario: IUsuarioi | null = null;
   fotoPerfilUrl: string | null = null;
   menuItems: any[] = [];
+  vistaActiva: string = '';
 
   constructor(private router: Router, private service: UsuarioService) {}
 
@@ -33,10 +34,9 @@ export class MenuusuarioComponent implements OnInit {
     }
   }
 
-  // Método de navegación
   navigationTo(ruta: string) {
     const rutatotal =`iniouser/${ruta}`.toLowerCase();
-    // alert(rutatotal);
+    this.vistaActiva = ruta;
     this.router.navigate([rutatotal]);
   }
 
