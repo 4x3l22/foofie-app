@@ -1,0 +1,93 @@
+/* Contenedor principal */
+.profile-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Sección izquierda (foto de perfil, nombre, ubicación) */
+.left-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 400px;
+}
+
+/* Contenedor de la imagen de perfil */
+.profile-picture-container {
+  position: relative;
+}
+
+.profile-picture {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #ccc;
+}
+
+/* Botón para cambiar la foto */
+.change-photo-btn {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  padding: 5px 10px;
+  font-size: 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.change-photo-btn:hover {
+  background-color: #0056b3;
+}
+
+/* Estilo del nombre de usuario */
+.username {
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 15px;
+  text-align: center;
+}
+
+/* Estilo de la ubicación */
+.location {
+  font-size: 16px;
+  color: #777;
+  text-align: center;
+}
+
+/* Sección derecha (seguidores, seguidos) */
+.right-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Contenedores de seguidores y seguidos */
+.stats {
+  display: flex;
+  justify-content: space-between;
+  width: 300px;
+}
+
+.stats div {
+  text-align: center;
+}
+
+.stats h2 {
+  font-size: 20px;
+  margin: 0;
+}
+
+.stats p {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 5px 0;
+}

@@ -26,6 +26,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./homeuser.component.css']
 })
 export class HomeuserComponent implements OnInit {
+
   id?: number;
   message = '';
   desable = true;
@@ -34,6 +35,8 @@ export class HomeuserComponent implements OnInit {
   selectedIngredientes: IIngrediente[] = [];  // Lista de IDs seleccionados
   ingredientControl = new FormControl();
   filteredIngredientes!: Observable<IIngrediente[]>;
+  valida = true;
+  ms400 = '';
 
   constructor(
     private service: IngredientesService,
@@ -50,6 +53,11 @@ export class HomeuserComponent implements OnInit {
       startWith(''),
       map(value => this._filter(value || ''))
     );
+
+    if(this.valida == true){
+      this.message = "En la barra de busqueda de arriba, ingrese el nombre de un ingrediente para buscarlo.";
+
+    }
   }
 
   // Cargar ingredientes desde el servicio
@@ -99,7 +107,7 @@ export class HomeuserComponent implements OnInit {
     return ingrediente ? ingrediente.nombre : 'Desconocido';
   }
 
-  // Eliminar un ingrediente de la lista seleccionada
+
   remove(ingrediente: IIngrediente): void {
     const index = this.selectedIngredientes.indexOf(ingrediente);
     if (index >= 0) {
@@ -108,14 +116,33 @@ export class HomeuserComponent implements OnInit {
 
     // Enviar los IDs de los ingredientes seleccionados actualizados al servicio
     const selectedIds = this.selectedIngredientes.map(i => i.id);
-    this.sendIdsToService(selectedIds);
+
+    // Si no hay ingredientes seleccionados, mostrar el mensaje por defecto y limpiar la lista de recetas
+    if (this.selectedIngredientes.length === 0) {
+      this.valida = true;
+      this.message = "En la barra de búsqueda de arriba, ingrese el nombre de un ingrediente para buscarlo.";
+      this.ListaRecetas = [];  // Limpiar las recetas
+    }
+
+    // Actualizar el autocompletado
+    this.filteredIngredientes = this.ingredientControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value || ''))
+    );
+
+    this.sendIdsToService(selectedIds);  // Llamar al servicio para actualizar si hay ingredientes seleccionados
   }
 
   // Método para enviar los ingredientes seleccionados al servicio
   private sendIdsToService(ids: number[] | null) {
-    if (ids && ids.length > 0) {
+    if (ids && ids.length > 1) {
       this.recetasService.getRecetas(ids).subscribe({
         next: (recetas: IListaRecetas[]) => {
+          console.log(recetas.length);
+          if(ids.length >= 2){
+            this.valida = false;
+            this.message = "";
+          }
           this.ListaRecetas = recetas.map(receta => ({
             id: receta.id,
             nombre: receta.nombre,
@@ -129,13 +156,26 @@ export class HomeuserComponent implements OnInit {
           }));
         },
         error: (err) => {
+          if(err.status == 404){
+            this.valida = true;
+            this.message = "No hay recetas registradas con esos ingredientes, le pedimos tenga paciencia mientras agregamos más 🙇‍♂️";
+          }else if(err.status == 400){
+            this.message = "Debe seleccionar al menos dos ingredientes.";
+          }
           console.error('Error al obtener recetas:', err);
         }
       });
-    } else {
-      console.log('No se seleccionaron IDs.');
+    } else if(ids && ids.length == 0){
+      this.valida = true;
+      this.message = "En la barra de búsqueda de arriba, ingrese el nombre de un ingrediente para buscarlo.";
+    }else{
+      // Si no hay ingredientes seleccionados, limpiar la lista de recetas y mostrar mensaje por defecto
+      this.valida = true;
+      this.message = "Debe seleccionar al menos dos ingredientes.";
+      this.ListaRecetas = [];
     }
   }
+
 
   convertirBase64AUrl(base64: string): string {
     base64 = base64.trim();

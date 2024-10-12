@@ -47,7 +47,7 @@ export class RecetarioComponent implements  OnInit {
           if (recetaIds.length > 0) {
             this.serviceREcetas.lisRecetas(recetaIds).subscribe({
               next: (recetas: IListaRecetas[]) => {
-                this.toastr.success('Cargados con éxito', 'Hecho');
+                // this.toastr.success('Cargados con éxito', 'Hecho');
                 this.ListaRecetas = recetas.map(receta => ({
                   id: receta.id,
                   nombre: receta.nombre,

@@ -22,14 +22,13 @@ export class RecetauserComponent implements OnInit{
 
   id?:  number;
   recetaForm:  FormGroup;
-  publicacion: IPublicacion[] = [];
   receta: IListaRecetas | undefined;
-  base64?: string;
-  selectedImage: string | ArrayBuffer | null | undefined = null;
   compressedImageBase64: string | ArrayBuffer | null = null;
   user?: string;
   userId?: number;
   isFavorite: boolean = false;
+  charCount: number = 0;
+  maxChars: number = 1000;
 
   constructor(
     private service: PublicacionService,
@@ -40,9 +39,7 @@ export class RecetauserComponent implements OnInit{
     this.recetaForm = new FormGroup({
       titulo: new FormControl(null, [Validators.required]),
       descripcion: new FormControl(null, [Validators.required]),
-      foto:  new FormControl(null, [Validators.required]),
-      recetaId:  new FormControl(null, [Validators.required]),
-      usuarioId:   new FormControl(null, [Validators.required])
+      foto:  new FormControl(null, [Validators.required])
     });
   }
 
@@ -62,9 +59,15 @@ export class RecetauserComponent implements OnInit{
     } else {
       console.error('No se encontró el usuario en el localStorage');
     }
+
+    this.updateCharCount()
   }
 
   save(recetaId: number): void {
+    let img = this.recetaForm.get('foto')?.value;
+    if(img){
+      console.log('hay una imagen');
+    }
     const datapubli: IPublicacion = {
       id: 0,
       titulo: this.recetaForm.get('titulo')?.value,
@@ -171,5 +174,12 @@ export class RecetauserComponent implements OnInit{
         this.toastr.error('Error al guardar en recetario','Error');
       }
     })
+  }
+
+  updateCharCount(): void {
+    const descripcionControl = this.recetaForm.get('descripcion');
+    if (descripcionControl) {
+      this.charCount = descripcionControl.value ? descripcionControl.value.length : 0;
+    }
   }
 }

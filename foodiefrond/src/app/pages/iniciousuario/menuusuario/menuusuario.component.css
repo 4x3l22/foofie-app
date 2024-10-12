@@ -4,9 +4,9 @@
   overflow: hidden;
   border-radius: 15px;
 }
-.pt{
-  margin-top: 80px;
-}
+/* .pt{
+  margin-bo: 80px;
+} */
 .medio{
   display: flex;
   align-items: center;
@@ -49,6 +49,10 @@
 }
 .navbar-custom {
   background-color: #FF3D00;
+  position: fixed; /* Fija el navbar */
+  top: 0; /* Lo sitúa en la parte superior */
+  width: 100%; /* Ocupa todo el ancho de la pantalla */
+  z-index: 1000; /* Asegura que el navbar esté por encima de otros elementos */
 }
 .imagenlogo{
   height: 100px;

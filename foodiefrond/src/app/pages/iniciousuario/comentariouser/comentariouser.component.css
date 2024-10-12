@@ -1,0 +1,178 @@
+/* Estilo general */
+.container {
+  margin-top: 20px;
+  padding: 0 15px;
+}
+
+.profile-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.profile-img-small {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.user-name {
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-left: 12px;
+}
+
+/* Ajustar el tamaño de la imagen de la publicación */
+.post-image {
+  max-width: 100%; /* Asegúrate de que la imagen ocupe todo el ancho del contenedor */
+  height: auto; /* Mantiene la relación de aspecto */
+  border-radius: 10px;
+  margin: 10px 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+/* Ajustar el contenedor de la publicación */
+.post-container {
+  border: 1px solid #ddd; /* Borde del contenedor */
+  border-radius: 10px; /* Bordes redondeados para el contenedor */
+  padding: 15px; /* Espacio interno */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+  background-color: #fff; /* Fondo blanco para el contenedor */
+  overflow: hidden; /* Para asegurarnos de que nada sobresalga */
+}
+
+/* Ajustar los contadores de comentarios, likes y compartidos */
+.post-stats {
+  display: flex;
+  justify-content: space-around; /* Distribuir uniformemente */
+  margin-top: 5px; /* Reducir el margen superior */
+}
+
+.post-stats span {
+  margin: 0; /* Sin margen para que estén más cerca */
+  font-size: 0.9rem; /* Ajustar el tamaño de la fuente para ser un poco más pequeño */
+}
+
+/* Alinear mejor los contadores */
+.post-stats span i {
+  margin-right: 3px; /* Menor separación entre el ícono y el número */
+}
+
+/* Ajustar la imagen de perfil del comentario */
+.comment-profile-img {
+  width: 40px; /* Tamaño más pequeño */
+  height: 40px;
+  border-radius: 50%; /* Bordes redondeados */
+  margin-right: 10px; /* Espacio entre la imagen y el texto */
+}
+
+.comments-section .comment {
+  margin-bottom: 15px;
+}
+
+.commenter-name {
+  font-weight: bold;
+  font-size: 1em;
+}
+
+.comment-text {
+  font-size: 0.9em;
+  color: #333;
+}
+
+/* Barra flotante para comentarios */
+.floating-comment-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 10px;
+  background-color: #f8f9fa;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  height: 80px; /* Altura fija de la barra */
+  display: flex;
+  align-items: center; /* Alinea verticalmente el contenido */
+}
+
+/* Ajuste del contenedor de input y botón */
+.comment-input {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 5px;
+  background-color: white;
+  border-radius: 25px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex; /* Asegura que el input y el botón estén en una misma línea */
+  align-items: center; /* Alinea verticalmente el contenido */
+  width: 100%;
+}
+
+/* Estilo del textarea */
+.comment-field {
+  flex-grow: 1;
+  resize: none; /* Elimina el control de redimensionamiento manual */
+  padding: 10px;
+  border-radius: 25px;
+  border: none;
+  outline: none;
+  overflow: hidden; /* Para que no aparezcan barras de desplazamiento */
+  height: 40px; /* Altura mínima */
+  max-height: 120px; /* Altura máxima para controlar el crecimiento */
+  font-size: 0.9em;
+}
+
+/* Evita la aparición de scrollbar en el textarea */
+.comment-field::-webkit-scrollbar {
+  display: none;
+}
+
+.comment-btn {
+  margin-left: 10px;
+  border-radius: 25px;
+  padding: 0 15px;
+  height: 40px;
+  white-space: nowrap;
+}
+
+/* Ajuste dinámico del tamaño del textarea */
+.comment-field.auto-expand {
+  height: auto;
+  min-height: 40px;
+  max-height: 150px;
+}
+
+@media (max-width: 768px) {
+  .user-name, .commenter-name {
+    font-size: 1em;
+  }
+
+  .post-description p {
+    font-size: 0.9em;
+  }
+
+  .post-reactions {
+    font-size: 0.8em;
+  }
+}
+
+/* Ajuste para comentarios en móviles */
+.comments-section {
+  padding-bottom: 80px; /* Ajusta el valor según la altura de la barra flotante */
+}
+
+.salida {
+  padding-left: 30px;
+  font-size: 30px;
+  cursor: pointer;
+  width: 4%;
+}
+.post{
+  width: 50rem;
+}
+.comment-content{
+  width: 80%;
+  margin-left: 12px;
+}

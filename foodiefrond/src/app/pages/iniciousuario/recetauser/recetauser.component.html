@@ -51,14 +51,20 @@
 
         <!-- Campo para el título de la publicación -->
         <div class="form-group">
-          <label for="titulo">Título de tu publicación</label>
-          <input type="text" formControlName="titulo" class="form-control" placeholder="Introduce un título atractivo">
+          <label for="titulo">Título de tu publicación *</label>
+          <input type="text" id="titulo" formControlName="titulo" class="form-control" placeholder="Introduce un título atractivo">
+          <div *ngIf="recetaForm.get('titulo')?.invalid && recetaForm.get('titulo')?.touched" class="text-danger">
+            El titulo de la publicación es obligatorio.
+          </div>
         </div>
 
         <!-- Vista previa de la imagen -->
         <div class="form-group mt-4">
-          <label for="foto">Sube una foto de tu resultado</label>
-          <input type="file" class="form-control" (change)="onFileSelected($event)">
+          <label for="foto">Sube una foto de tu resultado*</label>
+          <input type="file" id="foto" class="form-control" formControlName="foto" (change)="onFileSelected($event)" accept="image/*">
+          <div *ngIf="recetaForm.get('foto')?.invalid && recetaForm.get('foto')?.touched" class="text-danger-emphasis">
+            debe selecionar una imagen
+          </div>
         </div>
 
         <!-- Imagen previa -->
@@ -69,12 +75,18 @@
 
         <!-- Campo para comentarios adicionales -->
         <div class="form-group mt-3">
-          <label for="descripcion">Comentarios adicionales</label>
-          <textarea formControlName="descripcion" class="form-control" rows="3" placeholder="Cuéntanos tu experiencia al preparar esta receta..."></textarea>
+          <label for="descripcion">Comentarios adicionales *</label>
+          <textarea formControlName="descripcion" id="descripcion" (input)="updateCharCount()" maxlength="1000" class="form-control" rows="3" placeholder="Cuéntanos tu experiencia al preparar esta receta..."></textarea>
+          <div *ngIf="recetaForm.get('foto')?.invalid && recetaForm.get('foto')?.touched">
+            La descripción es obligatoria.
+          </div>
+          <small [ngClass]="{ 'text-danger': charCount >= maxChars }">
+            {{ charCount }}/{{ maxChars }} caracteres
+          </small>
         </div>
 
         <!-- Botón para publicar -->
-        <button type="submit" class="btn btn-success mt-3 mb-3">Publicar Resultado</button>
+        <button type="submit" [disabled]="recetaForm.invalid" class="btn btn-success mt-3 mb-3">Publicar Resultado</button>
       </form>
     </div>
   </div>

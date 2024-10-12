@@ -57,3 +57,6 @@ img {
 .previmg >img{
   width: 30%;
 }
+.text-danger {
+  font-weight: bold;
+}

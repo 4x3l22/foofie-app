@@ -1,0 +1,35 @@
+<div class="post-container" *ngFor="let public of publica">
+  <!-- Contenedor de la foto de perfil y el nombre del usuario -->
+  <div class="post-header">
+    <img [src]="public.fotoPerfil" alt="Foto de perfil" class="profile-pic">
+    <span class="user-name">{{public.nombreUsuario}}</span>
+  </div>
+
+  <!-- Título de la publicación -->
+  <div class="post-title">
+    <h3>{{public.titulo}}</h3>
+  </div>
+
+  <!-- Imagen de la publicación -->
+  <div class="post-image">
+    <img [src]="public.foto" alt="Imagen publicada">
+  </div>
+
+  <!-- Descripción de la publicación -->
+  <div class="post-description">
+    <p>{{public.descripcion}}</p>
+  </div>
+
+  <!-- Sección de interacción (comentarios, likes, etc.) -->
+  <div class="post-actions">
+    <button class="comment-btn" (click)="navigateTo(public)">
+      <i class="fa-regular fa-comments"></i> Comentar
+    </button>
+    <button class="comment-btn">
+      <i class="fa-solid fa-fire"></i> Exquisito
+    </button>
+    <button class="comment-btn">
+      <i class="fa-solid fa-arrow-up-from-bracket"></i> Compartir
+    </button>
+  </div>
+</div>

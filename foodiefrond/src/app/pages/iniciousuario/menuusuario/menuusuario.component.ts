@@ -80,12 +80,10 @@ export class MenuusuarioComponent implements OnInit {
 
     // Si la cadena es válida, construir la URL
     if (base64) {
-        // console.log("debug:  "+'data:image/png;base64,'+base64);
-
-        return 'data:image/jpeg;base64,' + base64;
+      return 'data:image/jpeg;base64,' + base64;
     } else {
-        console.error('La cadena base64 está vacía o es inválida');
-        return ''; // O algún valor predeterminado
+      console.error('La cadena base64 está vacía o es inválida');
+      return ''; // O algún valor predeterminado
     }
   }
 

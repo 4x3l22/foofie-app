@@ -1,0 +1,62 @@
+<div class="salida" (click)="navigateTo('iniouser/social')">
+  <i class="fa-solid fa-x"></i>
+</div>
+<div class="container mt-4">
+  <!-- Publicación -->
+  <div class="post">
+    <!-- Foto de perfil del usuario que hizo la publicación -->
+    <div class="user-info d-flex align-items-center">
+      <img [src]="publica?.fotoPerfil" alt="Foto de perfil" class="profile-img rounded-circle">
+      <span class="user-name ml-3"> {{publica?.nombreUsuario}}</span>
+    </div>
+
+    <!-- Imagen de la publicación -->
+    <div class="post-image mt-3">
+      <img [src]="publica?.foto" alt="Imagen de la publicación" class="img-fluid">
+    </div>
+
+    <!-- Descripción de la publicación -->
+    <div class="post-description mt-3">
+      <p>{{publica?.descripcion}}</p>
+    </div>
+
+    <!-- Reacciones (Comentarios, Likes, Compartidos) -->
+    <div class="post-reactions d-flex justify-content-between mt-2">
+      <span class="comments-count">10 Comentarios</span>
+      <span class="likes-count">5 Likes</span>
+      <span class="shares-count">2 Compartidos</span>
+    </div>
+  </div>
+
+  <!-- Comentarios -->
+  <div class="comments-section mt-4">
+    <!-- Comentario individual -->
+    <div class="comment d-flex align-items-start mt-3" *ngFor="let coment of comentarios">
+      <img [src]="coment.fotoPerfil" alt="Foto de perfil" class="profile-img rounded-circle">
+      <div class="comment-content ml-3">
+        <span class="commenter-name">{{coment.nombreUsuario}}</span>
+        <p class="comment-text">{{coment.texto}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Barra flotante para escribir comentario -->
+<div class="floating-comment-bar">
+  <form [formGroup]="comentarioForm" (ngSubmit)="registrarComentario(publica?.publicacionId!)" class="comment-input d-flex align-items-center">
+    <img [src]="fotoComentario" alt="Foto de perfil" class="profile-img-small rounded-circle">
+
+    <!-- Textarea para el comentario con el formControlName correcto -->
+    <textarea class="form-control comment-field" formControlName="texto" id="texto" placeholder="Escribe un comentario..." maxlength="200"></textarea>
+
+    <!-- Botón "Publicar" que se habilita solo cuando el textarea tiene contenido válido -->
+    <button
+      class="btn btn-primary comment-btn"
+      [disabled]="comentarioForm.get('texto')?.invalid || comentarioForm.get('texto')?.value === ''"
+      >
+      Publicar
+    </button>
+
+  </form>
+</div>
+

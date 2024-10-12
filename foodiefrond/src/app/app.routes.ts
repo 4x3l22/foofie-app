@@ -26,6 +26,9 @@ import { RecetaingredienteComponent } from './pages/recetaingrediente/recetaingr
 import { RecetauserComponent } from './pages/iniciousuario/recetauser/recetauser.component';
 import { CargamsvingreComponent } from './pages/recetaingrediente/cargamsvingre/cargamsvingre.component';
 import { RecetarioComponent } from './pages/iniciousuario/recetario/recetario.component';
+import { SocialuserComponent } from './pages/iniciousuario/socialuser/socialuser.component';
+import { PerfilusuarioComponent } from './pages/iniciousuario/perfilusuario/perfilusuario.component';
+import {ComentariouserComponent} from "./pages/iniciousuario/comentariouser/comentariouser.component";
 
 export const routes: Routes = [
   {  path: 'login', component: LoginComponent },
@@ -68,6 +71,9 @@ export const routes: Routes = [
       { path: 'homeuser', component: HomeuserComponent },
       { path: 'recetauser', component: RecetauserComponent },
       { path: 'recetario', component: RecetarioComponent},
+      { path: 'social', component: SocialuserComponent},
+      { path: 'perfil', component: PerfilusuarioComponent},
+      { path: 'comentario', component: ComentariouserComponent},
       { path: '**', redirectTo: 'homeuser' }
     ]
   },
