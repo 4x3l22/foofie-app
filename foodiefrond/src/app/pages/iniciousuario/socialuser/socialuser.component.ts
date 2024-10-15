@@ -106,4 +106,22 @@ export class SocialuserComponent implements OnInit{
     }
   }
 
+  share(publica: IPublica) {
+    if (navigator.share) {
+      navigator.share({
+        title: publica.titulo,
+        text: publica.descripcion,
+        url: window.location.href // Puedes cambiar esta URL si tienes una URL específica para compartir
+      }).then(() => {
+        console.log('Contenido compartido con éxito.');
+      }).catch((error) => {
+        console.error('Error al compartir:', error);
+      });
+    } else {
+      console.log('La API de compartir no es compatible con este navegador.');
+      // Aquí puedes manejar un método alternativo de compartir
+    }
+  }
+
+
 }
