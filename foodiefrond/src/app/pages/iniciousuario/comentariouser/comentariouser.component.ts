@@ -120,11 +120,21 @@ export class ComentariouserComponent implements AfterViewInit, OnInit {
 
   convertirBase64AUrl(base64: string): string {
     base64 = base64.trim();
+
+    base64 = base64.replace(/^data:image\/jpeg;base64,/, '');
+
     while (base64.length % 4 !== 0) {
-      base64 += '=';
+        base64 += '=';
     }
+
     base64 = base64.replace(/[^A-Za-z0-9+/=]/g, '');
-    return base64 ? 'data:image/jpeg;base64,' + base64 : '';
+
+    if (base64) {
+      return 'data:image/jpeg;base64,' + base64;
+    } else {
+      console.error('La cadena base64 está vacía o es inválida');
+      return '';
+    }
   }
 
   // Función para ajustar el tamaño del textarea automáticamente

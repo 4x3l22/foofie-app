@@ -6,29 +6,45 @@
       <i class="bi bi-plus-circle"></i> Agregar
     </button>
   </div>
+  <div class="tabla mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource">
+      <!-- Nombre Column -->
+      <ng-container matColumnDef="nombre">
+        <th mat-header-cell *matHeaderCellDef> Nombre </th>
+        <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+      </ng-container>
 
-  <div class="tabla">
-    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-striped table-hover">
-      <thead class="table-dark">
-        <tr>
-          <th>Nombre</th>
-          <th>Estado</th>
-          <th>Calificación</th>
-          <th>Funciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of recetas;">
-          <td>{{ item.nombre }}</td>
-          <td>{{ item.estado }}</td>
-          <td>{{ item.calificacion }}</td>
-          <td class="dp">
-            <button class="btn btn-warning" (click)="cargarReceta(item)" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-pencil-square"></i></button>
-            <button class="btn btn-danger" (click)="eliminarReceta(item.id)"><i class="bi bi-trash"></i></button>
-          </td>
-        </tr>
-      </tbody>
+      <!-- Descripcion Column -->
+      <ng-container matColumnDef="calificacion">
+        <th mat-header-cell *matHeaderCellDef> Calificación</th>
+        <td mat-cell *matCellDef="let element"> {{element.calificacion}} </td>
+      </ng-container>
+
+      <!-- Estado Column -->
+      <ng-container matColumnDef="estado">
+        <th mat-header-cell *matHeaderCellDef> Estado </th>
+        <td mat-cell *matCellDef="let element"> {{element.estado ? 'Activo' : 'Inactivo'}} </td>
+      </ng-container>
+
+      <!-- Acciones Column -->
+      <ng-container matColumnDef="acciones">
+        <th mat-header-cell *matHeaderCellDef> Funciones </th>
+        <td mat-cell *matCellDef="let element">
+          <button class="btn btn-danger" (click)="eliminarReceta(element.id)">
+            <i class="bi bi-trash"></i>
+          </button>
+          <button class="btn btn-warning" (click)="cargarReceta(element)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <i class="bi bi-pencil-square"></i>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
+
+    <!-- Paginador -->
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
   </div>
 </div>
 
@@ -91,7 +107,7 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="resetForm()">Cerrar</button>
             <button type="submit" class="btn btn-primary" [disabled]="recetaForm.invalid">Guardar</button>
           </div>
         </form>

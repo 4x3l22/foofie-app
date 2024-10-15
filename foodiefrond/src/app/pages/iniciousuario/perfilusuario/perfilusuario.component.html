@@ -1,22 +1,45 @@
 <div class="profile-container">
-  <div class="left-section">
-    <div class="profile-picture-container">
-      <img src="ruta_de_la_foto_de_perfil" alt="Foto de perfil" class="profile-picture">
-      <button class="change-photo-btn">Cambiar foto</button>
+  <div class="profile-header">
+    <div class="profile-avatar">
+      <img [src]="imagenPerfil" alt="User Avatar" class="avatar-img">
     </div>
-    <h1 class="username">Nombre de Usuario</h1>
-    <p class="location">Ubicación: Ciudad, País</p>
+    <div class="profile-info">
+      <h1>{{ nombre }}</h1>
+      <p>{{ correo }}</p>
+      <div class="social-icons">
+        <!-- <button class="btn btn-info" (click)="cambiarFoto()">Cambiar Foto</button> -->
+      </div>
+    </div>
   </div>
 
-  <div class="right-section">
-    <div class="stats">
-      <div class="followers">
-        <h2>Seguidores</h2>
-        <p>1200</p>
+  <div class="profile-content">
+    <div class="post-container" *ngFor="let public of publicacion">
+      <!-- Contenedor de la foto de perfil y el nombre del usuario -->
+      <div class="post-header">
+        <img [src]="imagenPerfil" alt="Foto de perfil" class="profile-pic">
+        <span class="user-name">{{ nombre }}</span>
       </div>
-      <div class="following">
-        <h2>Seguidos</h2>
-        <p>350</p>
+
+      <!-- Título de la publicación -->
+      <div class="post-title">
+        <h3>{{ public.titulo }}</h3>
+      </div>
+
+      <!-- Imagen de la publicación -->
+      <div class="post-image">
+        <img [src]="public.foto" alt="Imagen publicada" class="post-img">
+      </div>
+
+      <!-- Descripción de la publicación -->
+      <div class="post-description">
+        <p>{{ public.descripcion }}</p>
+      </div>
+
+      <!-- Sección de interacción (comentarios, likes, etc.) -->
+      <div class="post-actions">
+        <button class="comment-btn">
+          <i class="fa-solid fa-arrow-up-from-bracket"></i> Compartir
+        </button>
       </div>
     </div>
   </div>

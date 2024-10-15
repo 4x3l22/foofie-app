@@ -42,9 +42,9 @@ export class MenuusuarioComponent implements OnInit {
 
   // Listar usuario y almacenar en sessionStorage
   listUsuario() {
-    const usuarioObservable = this.service.listFromLocalStorage(); // Llamamos al método del servicio
-
+    const usuarioObservable = this.service.listFromLocalStorage();
     if (usuarioObservable) {
+      // alert("Aquí");
       usuarioObservable.subscribe(
         (data: IUsuarioi) => {  // Ajustar para recibir un objeto en lugar de un array
           this.usuario = data;
@@ -69,6 +69,9 @@ export class MenuusuarioComponent implements OnInit {
   convertirBase64AUrl(base64: string): string {
     // Limpiar la cadena base64
     base64 = base64.trim();
+
+    // Eliminar el prefijo "data:image/jpeg;base64," si está presente
+    base64 = base64.replace(/^data:image\/jpeg;base64,/, '');
 
     // Asegurarse de que la longitud sea un múltiplo de 4
     while (base64.length % 4 !== 0) {

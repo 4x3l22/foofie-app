@@ -6,28 +6,45 @@
       <i class="bi bi-plus-circle"></i> Agregar
     </button>
   </div>
-  <div class="tabla">
-    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dttrigger" class="table table-striped table-hover">
-      <thead class="table-dark">
-        <tr>
-          <th>Nombre</th>
-          <th>Descripción</th>
-          <th>Estado</th>
-          <th>Funciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of ingredientes;">
-          <td>{{item.nombre}}</td>
-          <td>{{item.descripcion}}</td>
-          <td>{{item.estado}}</td>
-          <td class="dp">
-            <button class="btn btn-danger" (click)="eliminarIngrediente(item.id)"><i class="bi bi-trash"></i></button>
-            <button class="btn btn-warning" (click)="cargarIngrediente(item)" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-pencil-square"></i></button>
-          </td>
-        </tr>
-      </tbody>
+  <div class="tabla mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource">
+      <!-- Nombre Column -->
+      <ng-container matColumnDef="nombre">
+        <th mat-header-cell *matHeaderCellDef> Nombre </th>
+        <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+      </ng-container>
+
+      <!-- Descripcion Column -->
+      <ng-container matColumnDef="descripcion">
+        <th mat-header-cell *matHeaderCellDef> Descripción </th>
+        <td mat-cell *matCellDef="let element"> {{element.descripcion}} </td>
+      </ng-container>
+
+      <!-- Estado Column -->
+      <ng-container matColumnDef="estado">
+        <th mat-header-cell *matHeaderCellDef> Estado </th>
+        <td mat-cell *matCellDef="let element"> {{element.estado ? 'Activo' : 'Inactivo'}} </td>
+      </ng-container>
+
+      <!-- Acciones Column -->
+      <ng-container matColumnDef="acciones">
+        <th mat-header-cell *matHeaderCellDef> Funciones </th>
+        <td mat-cell *matCellDef="let element">
+          <button class="btn btn-danger" (click)="eliminarIngrediente(element.id)">
+            <i class="bi bi-trash"></i>
+          </button>
+          <button class="btn btn-warning" (click)="cargarIngrediente(element)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <i class="bi bi-pencil-square"></i>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
+
+    <!-- Paginador -->
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
   </div>
 </div>
 
@@ -57,7 +74,7 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="resetForm()">Cerrar</button>
             <button type="submit" class="btn btn-primary" [disabled]="ingredientForm.invalid">Guardar</button>
           </div>
         </form>

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IIngrediente } from '../interface/IIngredientes';
 import { Observable } from 'rxjs';
@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 export class IngredientesService {
 
   private url = 'http://localhost:9191/api/Ingredientes';
-  private msv = '/cargar-masiva';
+  private msv = '/carga-masiva';
 
   constructor(private http :  HttpClient) { }
 
@@ -18,14 +18,14 @@ export class IngredientesService {
   }
 
   save(module: IIngrediente): Observable<IIngrediente>{
-    const  headers = {'Content-Type': 'application/json'};
+    const  headers = new HttpHeaders({'Content-Type': 'application/json'});
     return  this.http.post<IIngrediente>(this.url, module, {headers: headers});
 
   }
 
   saveMSV(ingredientes: IIngrediente[]):  Observable<IIngrediente[]>{
-    const headers = {'Content-Type': 'application/json'};
-    return this.http.post<IIngrediente[]>(this.url+this.msv,  ingredientes, {headers: headers});
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.post<IIngrediente[]>(this.url+this.msv,  ingredientes, {headers});
   }
 
 

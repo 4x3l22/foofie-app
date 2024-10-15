@@ -1,93 +1,208 @@
-/* Contenedor principal */
 .profile-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding: 20px;
-  max-width: 900px;
+  max-width: 1000px;
   margin: 0 auto;
+  padding: 20px;
+  font-family: 'Arial', sans-serif;
+  background-color: #f0f2f5;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-
-/* Sección izquierda (foto de perfil, nombre, ubicación) */
-.left-section {
+.profile-header {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  max-width: 400px;
+  margin-bottom: 30px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
 }
-
-/* Contenedor de la imagen de perfil */
-.profile-picture-container {
-  position: relative;
-}
-
-.profile-picture {
+.profile-avatar {
   width: 150px;
   height: 150px;
   border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid #ccc;
+  overflow: hidden;
+  margin-right: 30px;
 }
-
-/* Botón para cambiar la foto */
-.change-photo-btn {
+.profile-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.profile-info h1 {
+  margin: 0 0 10px 0;
+  color: #333;
+}
+.profile-info p {
+  margin: 5px 0;
+  color: #666;
+}
+.social-icons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+.social-icon img {
+  width: 24px;
+  height: 24px;
+}
+/* .profile-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+} */
+.courses-section, .payment-section, .subscription-section {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+.course-timeline {
+  position: relative;
+}
+.course-item {
+  display: flex;
+  margin-bottom: 20px;
+}
+.course-marker {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #ddd;
+  margin-right: 20px;
+}
+.course-marker.completed {
+  background-color: #4CAF50;
+}
+.course-line {
   position: absolute;
-  bottom: 5px;
-  right: 5px;
-  padding: 5px 10px;
+  left: 10px;
+  top: 20px;
+  bottom: 0;
+  width: 2px;
+  background-color: #ddd;
+}
+.course-details h3 {
+  margin: 0 0 5px 0;
+  color: #333;
+}
+.course-details p {
+  margin: 0 0 5px 0;
+  color: #666;
+}
+.course-status {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 12px;
   font-size: 12px;
-  background-color: #007bff;
+  background-color: #ddd;
+}
+.course-status.completed {
+  background-color: #4CAF50;
+  color: white;
+}
+.payment-methods {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.payment-methods img {
+  height: 30px;
+}
+.card-info p {
+  margin: 5px 0;
+}
+.subscription-section ul {
+  padding-left: 20px;
+}
+.subscribe-button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #4CAF50;
   color: white;
   border: none;
-  border-radius: 12px;
-  cursor: pointer;
-}
-
-.change-photo-btn:hover {
-  background-color: #0056b3;
-}
-
-/* Estilo del nombre de usuario */
-.username {
-  font-size: 24px;
-  font-weight: bold;
-  margin-top: 15px;
-  text-align: center;
-}
-
-/* Estilo de la ubicación */
-.location {
+  border-radius: 5px;
   font-size: 16px;
-  color: #777;
-  text-align: center;
+  cursor: pointer;
+  margin-top: 20px;
+}
+.subscribe-button:hover {
+  background-color: #45a049;
 }
 
-/* Sección derecha (seguidores, seguidos) */
-.right-section {
+/* Contenedor general de la publicación */
+.post-container {
+  width: 100%;
+  /* max-width: 600px; */
+  margin-bottom: 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Encabezado de la publicación */
+.post-header {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+/* Estilo de la foto de perfil circular */
+.profile-pic {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 15px;
+}
+
+/* Nombre del usuario */
+.user-name {
+  font-weight: bold;
+  font-size: 16px;
+  color: #333;
+}
+
+/* Título de la publicación */
+.post-title h3 {
+  margin: 10px 0;
+  font-size: 18px;
+  color: #555;
+}
+
+/* Imagen de la publicación */
+.post-image img {
+  width: 100%;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+/* Descripción de la publicación */
+.post-description {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #666;
+  line-height: 1.5;
+}
+
+/* Sección de acciones (comentarios, likes, etc.) */
+.post-actions {
+  margin-top: 15px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.comment-btn {
+  background: none;
+  border: none;
+  color: #000000;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
   align-items: center;
 }
 
-/* Contenedores de seguidores y seguidos */
-.stats {
-  display: flex;
-  justify-content: space-between;
-  width: 300px;
-}
-
-.stats div {
-  text-align: center;
-}
-
-.stats h2 {
+.comment-btn i {
+  margin-right: 5px;
   font-size: 20px;
-  margin: 0;
-}
-
-.stats p {
-  font-size: 18px;
-  font-weight: bold;
-  margin: 5px 0;
 }

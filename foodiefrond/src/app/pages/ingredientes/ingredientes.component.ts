@@ -7,20 +7,27 @@ import { Subject } from 'rxjs';
 import { DataTablesModule } from 'angular-datatables';
 import { CommonModule } from '@angular/common';
 import { IngredientesService } from '../../service/ingredientes/ingredientes.service';
+import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
+import {MatTableDataSource, MatTableModule} from '@angular/material/table';
+import {AfterViewInit} from '@angular/core';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-ingredientes',
   standalone: true,
-  imports: [DataTablesModule, ReactiveFormsModule, CommonModule],
+  imports: [DataTablesModule, ReactiveFormsModule, CommonModule, MatTableModule, MatPaginatorModule],
   templateUrl: './ingredientes.component.html',
   styleUrls: ['./ingredientes.component.css']
 })
-export class IngredientesComponent implements OnInit {
+export class IngredientesComponent implements OnInit,  AfterViewInit {
+
   id?: number;
   ingredientForm: FormGroup;
   ingredientes: IIngrediente[] = [];
-  dtOptions: Config = {};
-  dttrigger: Subject<any> = new Subject<any>();
+  displayedColumns: string[] = ['nombre', 'descripcion', 'estado', 'acciones'];
+  dataSource = new MatTableDataSource<IIngrediente>(this.ingredientes);
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
     private builder: FormBuilder,
@@ -35,10 +42,11 @@ export class IngredientesComponent implements OnInit {
 
   ngOnInit(): void {
     this.listarIngredientes();
-    this.dtOptions = {
-      pagingType: "full_numbers",
-      lengthMenu: [5, 10, 15, 20]
-    };
+    this.dataSource.paginator = this.paginator;
+  }
+
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
   }
 
   navigateTo(rura: string){
@@ -49,7 +57,7 @@ export class IngredientesComponent implements OnInit {
     this.service.list().subscribe({
       next: (data: IIngrediente[]) => {
         this.ingredientes = data;
-        this.dttrigger.next(null);
+        this.dataSource.data = data;
       }
     });
   }
@@ -76,23 +84,36 @@ export class IngredientesComponent implements OnInit {
     if (this.id) {
       this.service.update(nuevoIngrediente).subscribe({
         next: (response) => {
+          Swal.fire('Actualizado con éxito', '', 'success');
+
           console.log('Ingrediente actualizado exitosamente', response);
           this.listarIngredientes();
           this.resetForm();
         },
         error: (error) => {
-          console.error('Error al actualizar el ingrediente', error);
+          Swal.fire({
+            title: 'Error',
+            text: error.error.message,
+          })
         }
       });
     } else {
       this.service.save(nuevoIngrediente).subscribe({
         next: (response) => {
+          Swal.fire({
+            title: 'Guardado con éxito',
+            confirmButtonText: 'vale'
+          });
           console.log('Registro exitoso', response);
           this.listarIngredientes();
           this.resetForm();
         },
         error: (error) => {
-          console.error('Error al registrar', error);
+          Swal.fire({
+            title: 'Error',
+            text: error.error.message,
+            confirmButtonText: 'Vale'
+          })
         }
       });
     }

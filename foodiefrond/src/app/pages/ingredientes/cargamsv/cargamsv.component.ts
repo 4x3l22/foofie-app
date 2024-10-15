@@ -70,7 +70,7 @@ export class CargamsvComponent {
           icon: 'success',
           title: '¡Éxito!',
           text: 'Los ingredientes fueron cargados correctamente.',
-          confirmButtonText: 'OK'
+          confirmButtonText: 'Vale'
         });
       },
       (error) => {

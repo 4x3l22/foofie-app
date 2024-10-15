@@ -1,5 +1,5 @@
 import { IngredientesService } from './../../../service/ingredientes/ingredientes.service';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IRecetaIngrediente } from '../../../service/interface/IRecetaIngrediente';
 import { RecetaingredienteService } from '../../../service/recetaingrediente/recetaingrediente.service';
@@ -12,23 +12,28 @@ import { Config } from 'datatables.net';
 import { Subject } from 'rxjs';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { Router } from '@angular/router';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-recetaingrediente',
   standalone: true,
-  imports: [DataTablesModule, CommonModule, ReactiveFormsModule, NgSelectModule],
+  imports: [DataTablesModule, CommonModule, ReactiveFormsModule, NgSelectModule,  MatTableModule, MatPaginatorModule],
   templateUrl: './recetaingrediente.component.html',
   styleUrls: ['./recetaingrediente.component.css']
 })
-export class RecetaingredienteComponent implements OnInit {
+export class RecetaingredienteComponent implements OnInit, AfterViewInit{
 
   id?: number;
   recetaIngredienteForm: FormGroup;
   recetaIngredientes: IRecetaIngrediente[] = [];
   receta: IReceta[] = [];
   ingredientes: IIngrediente[] = [];
-  dtOptions: Config = {};
-  dtTrigger: Subject<any> = new Subject<any>();
+
+  displayedColumns: string[] = ['receta', 'ingrediente', 'estado', 'acciones'];
+  dataSource = new MatTableDataSource<IRecetaIngrediente>(this.recetaIngredientes);
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
     private fb: FormBuilder,
@@ -48,10 +53,10 @@ export class RecetaingredienteComponent implements OnInit {
     this.listRecetaIngredientes();
     this.loadRecetas();
     this.loadIngrediens();
-    this.dtOptions = {
-      pagingType: 'full_numbers',
-      pageLength: 5
-    };
+  }
+
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
   }
 
   navigateTo(ruta:string){
@@ -62,7 +67,7 @@ export class RecetaingredienteComponent implements OnInit {
     this.recetaIngredienteService.list().subscribe({
       next: (data:  IRecetaIngrediente[]) => {
         this.recetaIngredientes = data;
-        this.dtTrigger.next(null);
+        this.dataSource.data = data;
       },
       error: (error) => {
         console.error('Error al listar los receta ingredientes', error);
@@ -127,5 +132,10 @@ export class RecetaingredienteComponent implements OnInit {
       estado: recetaIngrediente.estado
     });
     this.id = recetaIngrediente.id;
+  }
+
+  resetForm() {
+    this.recetaIngredienteForm.reset();
+    this.id = undefined; // Resetea el ID después de guardar
   }
 }

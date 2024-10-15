@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IReceta } from '../../service/interface/IReceta';
@@ -9,11 +9,13 @@ import { DataTablesModule } from 'angular-datatables';
 import { CommonModule } from '@angular/common';
 import { TipococinaService } from '../../service/tipococina/tipococina.service';
 import { ITipoCocina } from '../../service/interface/ITipoCocina';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 
 @Component({
   selector: 'app-receta',
   standalone: true,
-  imports: [DataTablesModule, CommonModule, ReactiveFormsModule],
+  imports: [DataTablesModule, MatTableModule, CommonModule, ReactiveFormsModule, MatPaginatorModule],
   templateUrl: './receta.component.html',
   styleUrls: ['./receta.component.css']
 })
@@ -25,6 +27,11 @@ export class RecetaComponent implements OnInit {
   dtOptions: Config = {};
   dtTrigger: Subject<any> = new Subject<any>();
   fotoPerfilBase64?: string;
+
+  displayedColumns: string[] = ['nombre', 'estado', 'calificacion', 'acciones'];
+  dataSource = new MatTableDataSource<ITipoCocina>(this.recetas);
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
     private builder: FormBuilder,
@@ -47,10 +54,10 @@ export class RecetaComponent implements OnInit {
   ngOnInit(): void {
     this.listRecetas();
     this.listTipCocinas();
-    this.dtOptions = {
-      pagingType: 'full_numbers',
-      pageLength: 10
-    };
+  }
+
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
   }
 
   navigateTo(ruta: string){
@@ -61,7 +68,7 @@ export class RecetaComponent implements OnInit {
     this.recetaService.list().subscribe({
       next: (data: IReceta[]) => {
         this.recetas = data;
-        this.dtTrigger.next(null);
+        this.dataSource.data = data;
       },
       error: (error) => {
         console.error('Error al listar las recetas', error);
